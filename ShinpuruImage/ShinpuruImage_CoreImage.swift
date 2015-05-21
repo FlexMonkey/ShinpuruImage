@@ -1,5 +1,5 @@
 //
-//  ShinpuruImage_PhotoEffect.swift
+//  ShinpuruImage_CoreImage.swift
 //  ShinpuruImage
 //
 //  Created by Simon Gladman on 21/05/2015.
@@ -87,14 +87,4 @@ func applyFilter(filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
     return filteredImage
 }
 
-struct KeyValuePair
-{
-    var key:String
-    var value: AnyObject
-    
-    init(key:String, value: AnyObject)
-    {
-        self.key = key
-        self.value = value
-    }
-}
+typealias KeyValuePair = (key:String, value: AnyObject)

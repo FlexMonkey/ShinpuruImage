@@ -25,12 +25,12 @@ class ViewController: UIViewController {
         
         let convolvedImage = SIDilateFilter(image, kernel: [10,10,10,10,10,  10,1,1,1,10,  10,1,0,1,10,  10,1,1,1,10,   10,10,10,10,10])
 
-        let rotatedImage = SIRotate(convolvedImage, angle: 0.3, backgroundColor: UIColor.purpleColor())
+        let rotatedImage = convolvedImage.SIRotate(0.3, backgroundColor: UIColor.purpleColor())
         
         let scaledImage = SIScale(rotatedImage, scaleX: 1, scaleY: 0.76)
         
         let noir = SIPhotoEffectNoir(scaledImage)
-        let colorful = SIMonochrome(noir, color: UIColor.yellowColor(), intensity: 1)
+        let colorful = SIMonochrome(noir, color: UIColor.yellowColor(), intensity: 1).SIRotate(0.3, backgroundColor: UIColor.purpleColor())
         
         imageView.image = colorful
         

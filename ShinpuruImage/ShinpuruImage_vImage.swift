@@ -65,6 +65,7 @@ func SIScale(image: UIImage, #scaleX: Float, #scaleY: Float) -> UIImage
     return outImage!
 }
 
+
 func SIRotate(image: UIImage, #angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
 {
     var imageBuffers = createBuffers(image)
@@ -78,6 +79,25 @@ func SIRotate(image: UIImage, #angle: Float, backgroundColor: UIColor = UIColor.
     free(imageBuffers.pixelBuffer)
     
     return outImage!
+}
+
+
+extension UIImage
+{
+    func SIRotate(angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
+    {
+        var imageBuffers = createBuffers(self)
+        
+        var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
+        
+        var error = vImageRotate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, angle,  &backgroundColor, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
 }
 
 // MARK: Convolution
