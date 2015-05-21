@@ -13,6 +13,8 @@
 		3EB16D161B0DAF860014A78D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D151B0DAF860014A78D /* Images.xcassets */; };
 		3EB16D191B0DAF860014A78D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D171B0DAF860014A78D /* LaunchScreen.xib */; };
 		3EB16D251B0DAF860014A78D /* ShinpuruImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D241B0DAF860014A78D /* ShinpuruImageTests.swift */; };
+		3EB16D301B0DAF9E0014A78D /* ShinpuruImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage.swift */; };
+		3EB16D331B0DB0010014A78D /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D321B0DB0010014A78D /* image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		3EB16D1E1B0DAF860014A78D /* ShinpuruImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShinpuruImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB16D231B0DAF860014A78D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EB16D241B0DAF860014A78D /* ShinpuruImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShinpuruImageTests.swift; sourceTree = "<group>"; };
+		3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage.swift; sourceTree = "<group>"; };
+		3EB16D321B0DB0010014A78D /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 		3EB16D0B1B0DAF860014A78D /* ShinpuruImage */ = {
 			isa = PBXGroup;
 			children = (
+				3EB16D311B0DAFD50014A78D /* assets */,
+				3EB16D2E1B0DAF8C0014A78D /* shinpuruImage */,
 				3EB16D0E1B0DAF860014A78D /* AppDelegate.swift */,
 				3EB16D101B0DAF860014A78D /* ViewController.swift */,
 				3EB16D121B0DAF860014A78D /* Main.storyboard */,
@@ -110,6 +116,22 @@
 				3EB16D231B0DAF860014A78D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3EB16D2E1B0DAF8C0014A78D /* shinpuruImage */ = {
+			isa = PBXGroup;
+			children = (
+				3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage.swift */,
+			);
+			name = shinpuruImage;
+			sourceTree = "<group>";
+		};
+		3EB16D311B0DAFD50014A78D /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				3EB16D321B0DB0010014A78D /* image.jpg */,
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB16D331B0DB0010014A78D /* image.jpg in Resources */,
 				3EB16D141B0DAF860014A78D /* Main.storyboard in Resources */,
 				3EB16D191B0DAF860014A78D /* LaunchScreen.xib in Resources */,
 				3EB16D161B0DAF860014A78D /* Images.xcassets in Resources */,
@@ -212,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB16D301B0DAF9E0014A78D /* ShinpuruImage.swift in Sources */,
 				3EB16D111B0DAF860014A78D /* ViewController.swift in Sources */,
 				3EB16D0F1B0DAF860014A78D /* AppDelegate.swift in Sources */,
 			);
