@@ -29,7 +29,10 @@ class ViewController: UIViewController {
         
         let scaledImage = SIScale(rotatedImage, scaleX: 1, scaleY: 0.76)
         
-        imageView.image = scaledImage
+        let noir = SIPhotoEffectNoir(scaledImage)
+        let colorful = SIMonochrome(noir, color: UIColor.yellowColor(), intensity: 1)
+        
+        imageView.image = colorful
         
         
     }
