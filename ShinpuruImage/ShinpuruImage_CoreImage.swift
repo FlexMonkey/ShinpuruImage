@@ -53,6 +53,14 @@ func SIMonochrome(image: UIImage, #color: UIColor, #intensity: Float) -> UIImage
 
 // CIGaussianBlur
 
+// MARK: CICategoryColorAdjustment
+
+// CIColorControls
+// CIExposureAdjust
+// CIGammaAdjust
+// CIVibrance
+// CIWhitePointAdjust
+
 // MARK: Utilities
 
 func applyFilter(filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
