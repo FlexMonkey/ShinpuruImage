@@ -23,15 +23,13 @@ class ViewController: UIViewController {
         
         // [10,10,10,10,10,  10,1,1,1,10,  10,1,1,1,10,  10,1,1,1,10,   10,10,10,10,10]
         
-        //let convolvedImage = SIDilateFilter(image, kernel: [10,10,10,10,10,  10,1,1,1,10,  10,1,0,1,10,  10,1,1,1,10,   10,10,10,10,10])
+        let convolvedImage = SIDilateFilter(image, kernel: [10,10,10,10,10,  10,1,1,1,10,  10,1,0,1,10,  10,1,1,1,10,   10,10,10,10,10])
+
+        let rotatedImage = SIRotate(convolvedImage, angle: 0.3, backgroundColor: UIColor.purpleColor())
         
-        let convolvedImage = SIEqualizationFilter(image)
+        let scaledImage = SIScale(rotatedImage, scaleX: 1, scaleY: 0.76)
         
-        // let rotatedImage = SIRotate(convolvedImage, angle: 0.3, backgroundColor: UIColor.purpleColor())
-        
-        // let scaledImage = SIScale(rotatedImage, scaleX: 1, scaleY: 0.333)
-        
-        imageView.image = convolvedImage
+        imageView.image = scaledImage
         
         
     }

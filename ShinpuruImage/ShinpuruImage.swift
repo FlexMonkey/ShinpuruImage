@@ -16,6 +16,8 @@ import Accelerate
 *		Rotate90 -- rotate an image by 0, 90, 180 or 270 degrees
 */
 
+// MARK: Morphology functions
+
 func SIDilateFilter(image: UIImage, #kernel: [UInt8]) -> UIImage
 {
     precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
@@ -48,6 +50,8 @@ func SIErodeFilter(image: UIImage, #kernel: [UInt8]) -> UIImage
     return outImage!
 }
 
+// MARK: High Level Geometry Functions
+
 func SIScale(image: UIImage, #scaleX: Float, #scaleY: Float) -> UIImage
 {
     var imageBuffers = createBuffers(image, outputScaleX: min(scaleX, 1), outputScaleY: min(scaleY, 1))
@@ -76,6 +80,8 @@ func SIRotate(image: UIImage, #angle: Float, backgroundColor: UIColor = UIColor.
     return outImage!
 }
 
+// MARK: Convolution
+
 func SIConvolutionFilter(image: UIImage, #kernel: [Int16], #divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
 {
     precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
@@ -93,6 +99,8 @@ func SIConvolutionFilter(image: UIImage, #kernel: [Int16], #divisor: Int, backgr
     
     return outImage!
 }
+
+// MARK: Utilities
 
 typealias SIImageBuffers = (inBuffer: vImage_Buffer, outBuffer: vImage_Buffer, pixelBuffer: UnsafeMutablePointer<Void>)
 
@@ -130,6 +138,11 @@ extension UIColor
 {
     func getRGB() -> [UInt8]
     {
+        func zeroIfDodgy(value: Float) ->Float
+        {
+            return isnan(value) || isinf(value) ? 0 : value
+        }
+        
         if CGColorGetNumberOfComponents(self.CGColor) == 4
         {
             let colorRef = CGColorGetComponents(self.CGColor);
@@ -154,11 +167,6 @@ extension UIColor
         {
             return [0,0,0,0]
         }
-    }
-    
-    func zeroIfDodgy(value: Float) ->Float
-    {
-        return isnan(value) || isinf(value) ? 0 : value
     }
 }
 
