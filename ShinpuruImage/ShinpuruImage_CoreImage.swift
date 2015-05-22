@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreImage
 
 // MARK: Photo Effects
 
@@ -15,23 +14,66 @@ extension UIImage
 {
     func SIPhotoEffectNoir() -> UIImage
     {
-        let filterName = "CIPhotoEffectNoir"
-        
-        return applyFilter(self, filterName, [])
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectNoir", keyValuePairs: [])
     }
-    
-    // CIPhotoEffectChrome
-    // CIPhotoEffectFade
-    // CIPhotoEffectInstant
-    // CIPhotoEffectMono
-    // CIPhotoEffectProcess
-    // CIPhotoEffectTonal
-    // CIPhotoEffectTransfer
+
+    func SIPhotoEffectChrome() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectChrome", keyValuePairs: [])
+    }
+
+    func SIPhotoEffectFade() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectFade", keyValuePairs: [])
+    }
+
+    func SIPhotoEffectInstant() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectInstant", keyValuePairs: [])
+    }
+
+    func SIPhotoEffectMono() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectMono", keyValuePairs: [])
+    }
+
+    func SIPhotoEffectProcess() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectProcess", keyValuePairs: [])
+    }
+
+    func SIPhotoEffectTonal() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectTonal", keyValuePairs: [])
+    }
+
+    func SIPhotoEffectTransfer() -> UIImage
+    {
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: "CIPhotoEffectTransfer", keyValuePairs: [])
+    }
     
     // MARK: CICategoryColorEffect
     
-    // CIFalseColor
-    // CIColorPosterize
+    func SIFalseColor(#color0: UIColor, color1: UIColor) -> UIImage
+    {
+        let inputColor0 = KeyValuePair(key: "inputColor0", value: CIColor(color: color0)!)
+        let inputColor1 = KeyValuePair(key: "inputColor1", value: CIColor(color: color1)!)
+        
+        let filterName = "CIFalseColor"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputColor0, inputColor1])
+    }
+    
+    // CIColorPosterize - inputLevels
+    
+    func SIPosterize(#levels: Int) -> UIImage
+    {
+        let inputLevels = KeyValuePair(key: "inputLevels", value: levels)
+        
+        let filterName = "CIColorPosterize"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputLevels])
+    }
     
     func SIMonochrome(#color: UIColor, intensity: Float) -> UIImage
     {
@@ -40,7 +82,7 @@ extension UIImage
         
         let filterName = "CIColorMonochrome"
         
-        return applyFilter(self, filterName, [inputColor, inputIntensity])
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputColor, inputIntensity])
     }
     
     // MARK: CICategoryStylize
@@ -63,32 +105,35 @@ extension UIImage
 }
 
 // MARK: Utilities
-// func imageByApplyingFilter(filterName: String!, withInputParameters params: [NSObject : AnyObject]!) -> CIImage! ??
 
-func applyFilter(image: UIImage, filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
+class ShinpuruCoreImageHelper
 {
-    let ciContext = CIContext(options: nil)
-    let ciFilter = CIFilter(name: filterName)
+    static let ciContext = CIContext(options: nil)
     
-    let inputImage = KeyValuePair(key: kCIInputImageKey, value: CIImage(image: image))
-    ciFilter.setValue(inputImage.value, forKey: inputImage.key)
-    
-    for keyValuePair in keyValuePairs
+    static func applyFilter(image: UIImage, filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
     {
-        ciFilter.setValue(keyValuePair.value, forKey: keyValuePair.key)
+        let ciFilter = CIFilter(name: filterName)
+        
+        let inputImage = KeyValuePair(key: kCIInputImageKey, value: CIImage(image: image))
+        ciFilter.setValue(inputImage.value, forKey: inputImage.key)
+        
+        for keyValuePair in keyValuePairs
+        {
+            ciFilter.setValue(keyValuePair.value, forKey: keyValuePair.key)
+        }
+        
+        var filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as! CIImage!
+        var filteredImageRef: CGImage!
+        
+        filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
+        
+        var filteredImage = UIImage(CGImage: filteredImageRef)!
+        
+        filteredImageData = nil
+        filteredImageRef = nil
+        
+        return filteredImage
     }
-    
-    var filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as! CIImage!
-    var filteredImageRef: CGImage!
-    
-    filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
-    
-    var filteredImage = UIImage(CGImage: filteredImageRef)!
-    
-    filteredImageData = nil
-    filteredImageRef = nil
-    
-    return filteredImage
 }
 
 typealias KeyValuePair = (key:String, value: AnyObject)

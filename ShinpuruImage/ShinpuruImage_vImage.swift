@@ -4,18 +4,11 @@
 //
 //  Created by Simon Gladman on 21/05/2015.
 //  Copyright (c) 2015 Simon Gladman. All rights reserved.
-// Thanks to https://github.com/j4nnis/AImageFilters
+//
+//  Thanks to https://github.com/j4nnis/AImageFilters
 
 import UIKit
 import Accelerate
-
-
-/*
-*		Reflect -- reflect an image across a  mirror plane at the center of the image in the x or y direction
-*		Shear --  shear and rescale an image in the x or y direction
-*		Rotate90 -- rotate an image by 0, 90, 180 or 270 degrees
-*/
-
 
 extension UIImage
 {
@@ -28,7 +21,7 @@ extension UIImage
         
         var imageBuffers = createBuffers(self)
         
-        var error = vImageDilate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageBackgroundColorFill))
+        var error = vImageDilate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageNoFlags))
         
         let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
         
@@ -44,7 +37,7 @@ extension UIImage
         
         var imageBuffers = createBuffers(self)
         
-        var error = vImageErode_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageBackgroundColorFill))
+        var error = vImageErode_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageNoFlags))
         
         let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
         
@@ -75,6 +68,47 @@ extension UIImage
         var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
         
         var error = vImageRotate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, angle,  &backgroundColor, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIRotateNinety(rotation: RotateNinety, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
+    {
+        var imageBuffers = createBuffers(self)
+        
+        var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
+        
+        var error = vImageRotate90_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, rotation.rawValue,  &backgroundColor, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIHorizontalReflect() -> UIImage
+    {
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageHorizontalReflect_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, UInt32(kvImageNoFlags))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIVerticalReflect() -> UIImage
+    {
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageVerticalReflect_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, UInt32(kvImageNoFlags))
         
         let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
         
@@ -134,6 +168,14 @@ private func createBuffers(image: UIImage, outputScaleX: Float = 1, outputScaleY
     var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(outputScaleY * Float(CGImageGetHeight(imageRef))), width: UInt(outputScaleX * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
     
     return (inBuffer, outBuffer, pixelBuffer)
+}
+
+enum RotateNinety: UInt8
+{
+    case Zero = 0
+    case Ninety = 1
+    case OneEighty = 2
+    case TwoSeventy = 3
 }
 
 extension UIColor

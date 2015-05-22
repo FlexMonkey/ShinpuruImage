@@ -29,7 +29,14 @@ class ShinpuruImageTests: XCTestCase {
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock() {
-            // Put the code you want to measure the time of here.
+            
+            let foo = CIContext(options: nil)
+            
+            for i in 0 ... 1000
+            {
+                let ciContext = CIContext(options: nil)
+                let ciFilter = CIFilter(name: "CIBloom")
+            }
         }
     }
     
