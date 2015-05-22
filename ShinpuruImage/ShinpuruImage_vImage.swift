@@ -16,75 +16,59 @@ import Accelerate
 *		Rotate90 -- rotate an image by 0, 90, 180 or 270 degrees
 */
 
-// MARK: Morphology functions
-
-func SIDilateFilter(image: UIImage, #kernel: [UInt8]) -> UIImage
-{
-    precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
-    let kernelSide = UInt32(sqrt(Float(kernel.count)))
-    
-    var imageBuffers = createBuffers(image)
-    
-    var error = vImageDilate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageBackgroundColorFill))
-    
-    let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: image.scale, orientation: .Up)
-    
-    free(imageBuffers.pixelBuffer)
-    
-    return outImage!
-}
-
-func SIErodeFilter(image: UIImage, #kernel: [UInt8]) -> UIImage
-{
-    precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
-    let kernelSide = UInt32(sqrt(Float(kernel.count)))
-    
-    var imageBuffers = createBuffers(image)
-    
-    var error = vImageErode_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageBackgroundColorFill))
-    
-    let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: image.scale, orientation: .Up)
-    
-    free(imageBuffers.pixelBuffer)
-    
-    return outImage!
-}
-
-// MARK: High Level Geometry Functions
-
-func SIScale(image: UIImage, #scaleX: Float, #scaleY: Float) -> UIImage
-{
-    var imageBuffers = createBuffers(image, outputScaleX: min(scaleX, 1), outputScaleY: min(scaleY, 1))
-    
-    var error = vImageScale_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, UInt32(kvImageBackgroundColorFill))
-    
-    let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: image.scale, orientation: .Up)
-    
-    free(imageBuffers.pixelBuffer)
-    
-    return outImage!
-}
-
-
-func SIRotate(image: UIImage, #angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
-{
-    var imageBuffers = createBuffers(image)
-    
-    var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
-    
-    var error = vImageRotate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, angle,  &backgroundColor, UInt32(kvImageBackgroundColorFill))
-    
-    let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: image.scale, orientation: .Up)
-    
-    free(imageBuffers.pixelBuffer)
-    
-    return outImage!
-}
-
 
 extension UIImage
 {
-    func SIRotate(angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
+    // MARK: Morphology functions
+    
+    func SIDilateFilter(#kernel: [UInt8]) -> UIImage
+    {
+        precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
+        let kernelSide = UInt32(sqrt(Float(kernel.count)))
+        
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageDilate_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIErodeFilter(#kernel: [UInt8]) -> UIImage
+    {
+        precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
+        let kernelSide = UInt32(sqrt(Float(kernel.count)))
+        
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageErode_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, 0, 0, kernel, UInt(kernelSide), UInt(kernelSide), UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    // MARK: High Level Geometry Functions
+    
+    func SIScale(#scaleX: Float, scaleY: Float) -> UIImage
+    {
+        var imageBuffers = createBuffers(self, outputScaleX: min(scaleX, 1), outputScaleY: min(scaleY, 1))
+        
+        var error = vImageScale_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIRotate(#angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
     {
         var imageBuffers = createBuffers(self)
         
@@ -98,27 +82,39 @@ extension UIImage
         
         return outImage!
     }
+    
+    // MARK: Convolution
+    
+    func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
+    {
+        precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
+        let kernelSide = UInt32(sqrt(Float(kernel.count)))
+        
+        var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
+        
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageConvolve_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, 0, 0, kernel, kernelSide, kernelSide, Int32(divisor), &backgroundColor, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    convenience init?(fromvImageOutBuffer outBuffer:vImage_Buffer, scale:CGFloat, orientation: UIImageOrientation)
+    {
+        var colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        var context = CGBitmapContextCreate(outBuffer.data, Int(outBuffer.width), Int(outBuffer.height), 8, outBuffer.rowBytes, colorSpace, CGBitmapInfo(CGImageAlphaInfo.NoneSkipLast.rawValue))
+        
+        var outCGimage = CGBitmapContextCreateImage(context)
+        
+        self.init(CGImage: outCGimage, scale:scale, orientation:orientation)
+    }
 }
 
-// MARK: Convolution
-
-func SIConvolutionFilter(image: UIImage, #kernel: [Int16], #divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
-{
-    precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
-    let kernelSide = UInt32(sqrt(Float(kernel.count)))
-    
-    var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
-    
-    var imageBuffers = createBuffers(image)
-    
-    var error = vImageConvolve_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, 0, 0, kernel, kernelSide, kernelSide, Int32(divisor), &backgroundColor, UInt32(kvImageBackgroundColorFill))
-    
-    let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: image.scale, orientation: .Up)
-    
-    free(imageBuffers.pixelBuffer)
-    
-    return outImage!
-}
 
 // MARK: Utilities
 
@@ -138,20 +134,6 @@ private func createBuffers(image: UIImage, outputScaleX: Float = 1, outputScaleY
     var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(outputScaleY * Float(CGImageGetHeight(imageRef))), width: UInt(outputScaleX * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
     
     return (inBuffer, outBuffer, pixelBuffer)
-}
-
-extension UIImage
-{
-    convenience init?(fromvImageOutBuffer outBuffer:vImage_Buffer, scale:CGFloat, orientation: UIImageOrientation)
-    {
-        var colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        var context = CGBitmapContextCreate(outBuffer.data, Int(outBuffer.width), Int(outBuffer.height), 8, outBuffer.rowBytes, colorSpace, CGBitmapInfo(CGImageAlphaInfo.NoneSkipLast.rawValue))
-        
-        var outCGimage = CGBitmapContextCreateImage(context)
-        
-        self.init(CGImage: outCGimage, scale:scale, orientation:orientation)
-    }
 }
 
 extension UIColor
