@@ -7,67 +7,71 @@
 //
 
 import UIKit
+import CoreImage
 
 // MARK: Photo Effects
 
-func SIPhotoEffectNoir(image: UIImage) -> UIImage
+extension UIImage
 {
-    let inputImage = KeyValuePair(key: kCIInputImageKey, value: CIImage(image: image))
+    func SIPhotoEffectNoir() -> UIImage
+    {
+        let filterName = "CIPhotoEffectNoir"
+        
+        return applyFilter(self, filterName, [])
+    }
     
-    let filterName = "CIPhotoEffectNoir"
+    // CIPhotoEffectChrome
+    // CIPhotoEffectFade
+    // CIPhotoEffectInstant
+    // CIPhotoEffectMono
+    // CIPhotoEffectProcess
+    // CIPhotoEffectTonal
+    // CIPhotoEffectTransfer
     
-    return applyFilter(filterName, [inputImage])
+    // MARK: CICategoryColorEffect
+    
+    // CIFalseColor
+    // CIColorPosterize
+    
+    func SIMonochrome(#color: UIColor, intensity: Float) -> UIImage
+    {
+        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color)!)
+        let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
+        
+        let filterName = "CIColorMonochrome"
+        
+        return applyFilter(self, filterName, [inputColor, inputIntensity])
+    }
+    
+    // MARK: CICategoryStylize
+    
+    // CIBloom
+    // CIGloom
+    // CIPixellate
+    
+    // MARK: CICategoryBlur
+    
+    // CIGaussianBlur
+    
+    // MARK: CICategoryColorAdjustment
+    
+    // CIColorControls
+    // CIExposureAdjust
+    // CIGammaAdjust
+    // CIVibrance
+    // CIWhitePointAdjust
 }
-
-// CIPhotoEffectChrome
-// CIPhotoEffectFade
-// CIPhotoEffectInstant
-// CIPhotoEffectMono
-// CIPhotoEffectProcess
-// CIPhotoEffectTonal
-// CIPhotoEffectTransfer
-
-// MARK: CICategoryColorEffect
-
-// CIFalseColor
-// CIColorPosterize
-
-func SIMonochrome(image: UIImage, #color: UIColor, #intensity: Float) -> UIImage
-{
-    let inputImage = KeyValuePair(key: kCIInputImageKey, value: CIImage(image: image))
-    let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color)!)
-    let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
-    
-    let filterName = "CIColorMonochrome"
-    
-    return applyFilter(filterName, [inputImage, inputColor, inputIntensity])
-}
-
-// MARK: CICategoryStylize
-
-// CIBloom
-// CIGloom
-// CIPixellate
-
-// MARK: CICategoryBlur
-
-// CIGaussianBlur
-
-// MARK: CICategoryColorAdjustment
-
-// CIColorControls
-// CIExposureAdjust
-// CIGammaAdjust
-// CIVibrance
-// CIWhitePointAdjust
 
 // MARK: Utilities
+// func imageByApplyingFilter(filterName: String!, withInputParameters params: [NSObject : AnyObject]!) -> CIImage! ??
 
-func applyFilter(filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
+func applyFilter(image: UIImage, filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
 {
     let ciContext = CIContext(options: nil)
-    
     let ciFilter = CIFilter(name: filterName)
+    
+    let inputImage = KeyValuePair(key: kCIInputImageKey, value: CIImage(image: image))
+    ciFilter.setValue(inputImage.value, forKey: inputImage.key)
     
     for keyValuePair in keyValuePairs
     {
@@ -80,7 +84,7 @@ func applyFilter(filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
     filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
     
     var filteredImage = UIImage(CGImage: filteredImageRef)!
- 
+    
     filteredImageData = nil
     filteredImageRef = nil
     

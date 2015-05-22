@@ -27,8 +27,8 @@ class ViewController: UIViewController {
 
         let rotatedImage = convolvedImage.SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor()).SIScale(scaleX: 1, scaleY: 0.76)
         
-        let noir = SIPhotoEffectNoir(rotatedImage)
-        let colorful = SIMonochrome(noir, color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
+        let noir = rotatedImage.SIPhotoEffectNoir()
+        let colorful = noir.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
         
         imageView.image = colorful
         
