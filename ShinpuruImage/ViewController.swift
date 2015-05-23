@@ -19,20 +19,18 @@ class ViewController: UIViewController {
         view.addSubview(imageView)
         
         let image = UIImage(named: "image.jpg")!
-        let convolvedImage = image.SIConvolutionFilter(kernel: [0, -1, 0, -1, 7, -1, 0, -1, 0], divisor: 4)
         
+        //let convolvedImage = image.SIConvolutionFilter(kernel: [0, -1, 0, -1, 7, -1, 0, -1, 0], divisor: 4)
         // [10,10,10,10,10,  10,1,1,1,10,  10,1,1,1,10,  10,1,1,1,10,   10,10,10,10,10]
-        
         //let convolvedImage = image.SIDilateFilter(kernel: [10,10,10,10,10,  10,1,1,1,10,  10,1,0,1,10,  10,1,1,1,10,   10,10,10,10,10])
 
-        let rotatedImage = convolvedImage.SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor()).SIScale(scaleX: 1, scaleY: 0.76)
+        let rotatedImage = image.SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor()).SIScale(scaleX: 1, scaleY: 0.76)
         
-        let noir = rotatedImage.SIPhotoEffectFade().SIPhotoEffectMono()
+        let noir = rotatedImage.SIFastBlur(width: 32, height: 32)
         
         // let colorful = noir.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
         
-        imageView.image = noir.SIPosterize(levels: 4)
-        
+        imageView.image = noir
         
     }
 

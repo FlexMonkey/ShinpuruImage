@@ -64,8 +64,6 @@ extension UIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputColor0, inputColor1])
     }
     
-    // CIColorPosterize - inputLevels
-    
     func SIPosterize(#levels: Int) -> UIImage
     {
         let inputLevels = KeyValuePair(key: "inputLevels", value: levels)
@@ -87,21 +85,94 @@ extension UIImage
     
     // MARK: CICategoryStylize
     
-    // CIBloom
-    // CIGloom
-    // CIPixellate
+    func SIBloom(#radius: Float, intensity: Float) -> UIImage
+    {
+        let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
+        let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
+        
+        let filterName = "CIBloom"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius, inputIntensity])
+    }
+
+    func SIGloom(#radius: Float, intensity: Float) -> UIImage
+    {
+        let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
+        let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
+        
+        let filterName = "CIGloom"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius, inputIntensity])
+    }
+    
+    func SIPixellate(#scale: Float) -> UIImage
+    {
+        let inputScale = KeyValuePair(key: "inputScale", value: scale)
+        
+        let filterName = "CIPixellate"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputScale])
+    }
     
     // MARK: CICategoryBlur
     
-    // CIGaussianBlur
+    func SIGaussianBlur(#radius: Float) -> UIImage
+    {
+        let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
+        
+        let filterName = "CIGaussianBlur"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius])
+    }
     
     // MARK: CICategoryColorAdjustment
     
-    // CIColorControls
-    // CIExposureAdjust
-    // CIGammaAdjust
-    // CIVibrance
-    // CIWhitePointAdjust
+    func SIColorControls(#saturation: Float, brightness: Float, contrast: Float) -> UIImage
+    {
+        let inputSaturation = KeyValuePair(key: "inputSaturation", value: saturation)
+        let inputBrightness = KeyValuePair(key: "inputBrightness", value: brightness)
+        let inputContrast = KeyValuePair(key: "inputContrast", value: contrast)
+        
+        let filterName = "CIColorControls"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputSaturation, inputBrightness, inputContrast])
+    }
+    
+    func SIExposureAdjust(#ev: Float) -> UIImage
+    {
+        let inputEV = KeyValuePair(key: "inputEV", value: ev)
+        
+        let filterName = "CIExposureAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputEV])
+    }
+
+    func SIGammaAdjust(#power: Float) -> UIImage
+    {
+        let inputPower = KeyValuePair(key: "inputPower", value: power)
+        
+        let filterName = "CIGammaAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputPower])
+    }
+
+    func SIVibrance(#amount: Float) -> UIImage
+    {
+        let inputAmount = KeyValuePair(key: "inputAmount", value: amount)
+        
+        let filterName = "CIVibrance"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputAmount])
+    }
+    
+    func SIWhitePointAdjust(#color: UIColor) -> UIImage
+    {
+        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color)!)
+        
+        let filterName = "CIWhitePointAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputColor])
+    }
 }
 
 // MARK: Utilities

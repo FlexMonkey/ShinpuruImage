@@ -119,6 +119,42 @@ extension UIImage
     
     // MARK: Convolution
     
+    func SIBoxBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
+    {
+        let oddWidth = UInt32(width % 2 == 0 ? width + 1 : width)
+        let oddHeight = UInt32(height % 2 == 0 ? height + 1 : height)
+        
+        var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
+        
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageBoxConvolve_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, 0, 0, oddHeight, oddWidth, &backgroundColor, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIFastBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
+    {
+        let oddWidth = UInt32(width % 2 == 0 ? width + 1 : width)
+        let oddHeight = UInt32(height % 2 == 0 ? height + 1 : height)
+        
+        var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
+        
+        var imageBuffers = createBuffers(self)
+        
+        var error = vImageTentConvolve_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, 0, 0, oddHeight, oddWidth, &backgroundColor, UInt32(kvImageBackgroundColorFill))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
     func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
     {
         precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
