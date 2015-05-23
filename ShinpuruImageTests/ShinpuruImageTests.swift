@@ -9,33 +9,49 @@
 import UIKit
 import XCTest
 
-class ShinpuruImageTests: XCTestCase {
-    
-    override func setUp() {
+class ShinpuruImageTests: XCTestCase
+{
+    var image: UIImage!
+
+    override func setUp()
+    {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        image = UIImage(named: "oculista.jpg")!
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            
-            let foo = CIContext(options: nil)
-            
-            for i in 0 ... 1000
+    // 0.311 sec on iPad Air 2
+    func testPerformanceSIFastBlur()
+    {
+        self.measureBlock()
+        {
+            for i in 0 ... 10
             {
-                let ciContext = CIContext(options: nil)
-                let ciFilter = CIFilter(name: "CIBloom")
+                let blurred = self.image.SIFastBlur(width: i * 5, height: i * 5)
+            }
+        }
+    }
+    
+    // 0.330 sec on iPad Air 2
+    func testPerformanceSIGaussianBlur()
+    {
+        self.measureBlock()
+        {
+            for i in 0 ... 10
+            {
+                let blurred = self.image.SIGaussianBlur(radius: Float(i) * 2.5)
+            }
+        }
+    }
+    
+    // 0.271 sec on iPad Air 2
+    func testPerformanceSIBoxBlur()
+    {
+        self.measureBlock()
+        {
+            for i in 0 ... 10
+            {
+                let blurred = self.image.SIBoxBlur(width: i * 5, height: i * 5)
             }
         }
     }

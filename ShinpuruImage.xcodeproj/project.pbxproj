@@ -16,6 +16,12 @@
 		3EB16D301B0DAF9E0014A78D /* ShinpuruImage_vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */; };
 		3EB16D331B0DB0010014A78D /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D321B0DB0010014A78D /* image.jpg */; };
 		BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */; };
+		BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A31B1019C400B3B9B3 /* oculista.jpg */; };
+		BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A41B1019C400B3B9B3 /* vegas.jpg */; };
+		BEF756AB1B102A0B00B3B9B3 /* oculista.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A31B1019C400B3B9B3 /* oculista.jpg */; };
+		BEF756AC1B102A2200B3B9B3 /* ShinpuruImage_vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */; };
+		BEF756AD1B102A8A00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */; };
+		BEF756AE1B10306B00B3B9B3 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D321B0DB0010014A78D /* image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +48,8 @@
 		3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_vImage.swift; sourceTree = "<group>"; };
 		3EB16D321B0DB0010014A78D /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_CoreImage.swift; sourceTree = "<group>"; };
+		BEF756A31B1019C400B3B9B3 /* oculista.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = oculista.jpg; path = assets/oculista.jpg; sourceTree = "<group>"; };
+		BEF756A41B1019C400B3B9B3 /* vegas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vegas.jpg; path = assets/vegas.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +140,8 @@
 		3EB16D311B0DAFD50014A78D /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				BEF756A31B1019C400B3B9B3 /* oculista.jpg */,
+				BEF756A41B1019C400B3B9B3 /* vegas.jpg */,
 				3EB16D321B0DB0010014A78D /* image.jpg */,
 			);
 			name = assets;
@@ -219,7 +229,9 @@
 			files = (
 				3EB16D331B0DB0010014A78D /* image.jpg in Resources */,
 				3EB16D141B0DAF860014A78D /* Main.storyboard in Resources */,
+				BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */,
 				3EB16D191B0DAF860014A78D /* LaunchScreen.xib in Resources */,
+				BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */,
 				3EB16D161B0DAF860014A78D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +240,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF756AB1B102A0B00B3B9B3 /* oculista.jpg in Resources */,
+				BEF756AE1B10306B00B3B9B3 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEF756AD1B102A8A00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */,
+				BEF756AC1B102A2200B3B9B3 /* ShinpuruImage_vImage.swift in Sources */,
 				3EB16D251B0DAF860014A78D /* ShinpuruImageTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

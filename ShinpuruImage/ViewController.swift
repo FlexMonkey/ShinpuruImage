@@ -24,11 +24,13 @@ class ViewController: UIViewController {
         // [10,10,10,10,10,  10,1,1,1,10,  10,1,1,1,10,  10,1,1,1,10,   10,10,10,10,10]
         //let convolvedImage = image.SIDilateFilter(kernel: [10,10,10,10,10,  10,1,1,1,10,  10,1,0,1,10,  10,1,1,1,10,   10,10,10,10,10])
 
-        let rotatedImage = image.SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor()).SIScale(scaleX: 1, scaleY: 0.76)
+        //let rotatedImage = image.SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor()).SIScale(scaleX: 1, scaleY: 0.76)
         
-        let noir = rotatedImage.SIFastBlur(width: 32, height: 32)
+        let noir = image.SIConvolutionFilter(kernel: SIConvolutionKernels.sharpen, divisor: 1).SIGloom(radius: 6, intensity: 6)
         
-        // let colorful = noir.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
+        
+        
+        // let colorful = image.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
         
         imageView.image = noir
         
