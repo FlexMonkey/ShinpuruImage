@@ -25,6 +25,7 @@ class RotateAndScale: SLHGroup
         super.init()
         
         margin = 5
+        slidersGroup.margin = 5
         
         scaleXslider.value = 1
         scaleYslider.value = 1
