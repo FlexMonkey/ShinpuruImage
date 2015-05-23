@@ -2,6 +2,8 @@
 
 ## Syntactic Sugar for Accelerate/vImage and Core Image Filters
 
+![Screenshot](/ShinpuruImage/shinpuruImageScreenShot.PNG)
+
 *ShinpuruImage* offers developers a consistent and strongly typed interface to Apple's Core Image and vImage/Accelerate image filters without the need for boilerplate code.
 
 *ShinpuruImage* filters are implemented as extensions to `UIImage` and can be chained together with a super easy syntax:
@@ -75,6 +77,13 @@
 * `func SIBoxBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
 * `func SIFastBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
 * `func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
+
+## Demo Application
+
+The demo app contains two components:
+
+* *[RotateAndScale](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/RotateAndScale.swift)* - demonstrates chained `SIScale()` and `SIRotate()` controlled by three numeric sliders
+* *[ColorControls](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ColorControls.swift)* - demonstrates `SIColorControls` controlled by three numeric sliders
 
 ## Performance 
 
