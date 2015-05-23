@@ -27,6 +27,7 @@
 		BEF756B71B10849300B3B9B3 /* LabelledSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756B61B10849300B3B9B3 /* LabelledSlider.swift */; };
 		BEF756B91B10854B00B3B9B3 /* RotateAndScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756B81B10854B00B3B9B3 /* RotateAndScale.swift */; };
 		BEF756BB1B108F3300B3B9B3 /* ColorControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756BA1B108F3300B3B9B3 /* ColorControls.swift */; };
+		BEF756BD1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG in Resources */ = {isa = PBXBuildFile; fileRef = BEF756BC1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		BEF756B61B10849300B3B9B3 /* LabelledSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelledSlider.swift; sourceTree = "<group>"; };
 		BEF756B81B10854B00B3B9B3 /* RotateAndScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotateAndScale.swift; sourceTree = "<group>"; };
 		BEF756BA1B108F3300B3B9B3 /* ColorControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorControls.swift; sourceTree = "<group>"; };
+		BEF756BC1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shinpuruImageScreenShot.PNG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		3EB16D311B0DAFD50014A78D /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				BEF756BC1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG */,
 				BEF756A31B1019C400B3B9B3 /* oculista.jpg */,
 				BEF756A41B1019C400B3B9B3 /* vegas.jpg */,
 				3EB16D321B0DB0010014A78D /* image.jpg */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EB16D331B0DB0010014A78D /* image.jpg in Resources */,
+				BEF756BD1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG in Resources */,
 				3EB16D141B0DAF860014A78D /* Main.storyboard in Resources */,
 				BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */,
 				3EB16D191B0DAF860014A78D /* LaunchScreen.xib in Resources */,
