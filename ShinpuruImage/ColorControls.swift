@@ -44,7 +44,8 @@ class ColorControls: SLHGroup
     
     func colorControlsChange()
     {
-        imageView.image = image.SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+        imageView.image = image
+                        .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
     }
     
     required init(coder aDecoder: NSCoder) {
