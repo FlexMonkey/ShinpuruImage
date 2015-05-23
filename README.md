@@ -75,3 +75,11 @@
 * `func SIBoxBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
 * `func SIFastBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
 * `func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
+
+## Performance 
+
+Because *ShinpuruImage* converts to and from `UIImage` with each filter invocation, using it for chaining filters together will never be as performant as using CoreImage properly.
+
+## Blurring Images
+
+To blur an image you have three options: a true Gaussian blur (`SIGaussianBlur`), a box blur (`SIBoxBlur`) and *ShinpuruImage* fast blur (`SIFastBlur`) which is based on `vImageTentConvolve`. Of the three, I've found `SIBoxBlur` to be the fastest and `SIGaussianBlur` to be the slowest. It's worth using `measureBlock()` to do your own performance testing. 
