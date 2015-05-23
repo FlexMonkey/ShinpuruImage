@@ -21,6 +21,7 @@ class ShinpuruImageTests: XCTestCase
     }
     
     // 0.311 sec on iPad Air 2
+    // 0.348 sec on iPhone 6
     func testPerformanceSIFastBlur()
     {
         self.measureBlock()
@@ -33,6 +34,7 @@ class ShinpuruImageTests: XCTestCase
     }
     
     // 0.330 sec on iPad Air 2
+    // 0.417 sec on iPhone 6
     func testPerformanceSIGaussianBlur()
     {
         self.measureBlock()
@@ -45,6 +47,7 @@ class ShinpuruImageTests: XCTestCase
     }
     
     // 0.271 sec on iPad Air 2
+    // 0.294 on iPhone 6
     func testPerformanceSIBoxBlur()
     {
         self.measureBlock()

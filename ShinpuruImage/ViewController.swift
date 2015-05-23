@@ -30,9 +30,9 @@ class ViewController: UIViewController {
         
         
         
-        // let colorful = image.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
+        let colorful = noir.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
         
-        imageView.image = noir
+        imageView.image = colorful
         
     }
 
