@@ -10,33 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let mainGroup = SLVGroup()
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
     
-        let imageView = UIImageView(frame: view.bounds.rectByInsetting(dx: 100, dy: 100))
-        imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        view.addSubview(imageView)
+        mainGroup.margin = 20
         
-        let image = UIImage(named: "image.jpg")!
+        mainGroup.children = [RotateAndScale(), ColorControls()]
         
-        //let convolvedImage = image.SIConvolutionFilter(kernel: [0, -1, 0, -1, 7, -1, 0, -1, 0], divisor: 4)
-        // [10,10,10,10,10,  10,1,1,1,10,  10,1,1,1,10,  10,1,1,1,10,   10,10,10,10,10]
-        //let convolvedImage = image.SIDilateFilter(kernel: [10,10,10,10,10,  10,1,1,1,10,  10,1,0,1,10,  10,1,1,1,10,   10,10,10,10,10])
-
-        //let rotatedImage = image.SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor()).SIScale(scaleX: 1, scaleY: 0.76)
-        
-        let noir = image.SIConvolutionFilter(kernel: SIConvolutionKernels.sharpen, divisor: 1).SIGloom(radius: 6, intensity: 6)
-        
-        
-        
-        let colorful = noir.SIMonochrome(color: UIColor.yellowColor(), intensity: 1).SIRotate(angle: 0.3, backgroundColor: UIColor.purpleColor())
-        
-        imageView.image = colorful
-        
+        view.addSubview(mainGroup)
     }
 
-
+    override func viewDidLayoutSubviews()
+    {
+        let top = topLayoutGuide.length
+        let bottom = bottomLayoutGuide.length
+        
+        mainGroup.frame = CGRect(x: 0, y: top, width: view.frame.width, height: view.frame.height - top - bottom).rectByInsetting(dx: 5, dy: 0)
+    }
 
 }
 

@@ -72,7 +72,18 @@ extension UIImage
     
     func SIScale(#scaleX: Float, scaleY: Float) -> UIImage
     {
-        var imageBuffers = createBuffers(self, outputScaleX: min(scaleX, 1), outputScaleY: min(scaleY, 1))
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(min(scaleY, 1) * Float(CGImageGetHeight(imageRef))), width: UInt(min(scaleX, 1) * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
         
         var error = vImageScale_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, UInt32(kvImageBackgroundColorFill))
         
@@ -85,7 +96,18 @@ extension UIImage
     
     func SIRotate(#angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
     {
-        var imageBuffers = createBuffers(self)
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(1 * Float(CGImageGetHeight(imageRef))), width: UInt(1 * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
         
         var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
         
@@ -100,7 +122,18 @@ extension UIImage
     
     func SIRotateNinety(rotation: RotateNinety, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage
     {
-        var imageBuffers = createBuffers(self)
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(1 * Float(CGImageGetHeight(imageRef))), width: UInt(1 * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
         
         var backgroundColor : Array<UInt8> = backgroundColor.getRGB()
         
@@ -115,7 +148,18 @@ extension UIImage
     
     func SIHorizontalReflect() -> UIImage
     {
-        var imageBuffers = createBuffers(self)
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(1 * Float(CGImageGetHeight(imageRef))), width: UInt(1 * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
         
         var error = vImageHorizontalReflect_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, UInt32(kvImageNoFlags))
         
@@ -128,7 +172,18 @@ extension UIImage
     
     func SIVerticalReflect() -> UIImage
     {
-        var imageBuffers = createBuffers(self)
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(1 * Float(CGImageGetHeight(imageRef))), width: UInt(1 * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
         
         var error = vImageVerticalReflect_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, UInt32(kvImageNoFlags))
         
@@ -246,25 +301,6 @@ extension UIImage
 // MARK: Utilities
 
 typealias SIImageBuffers = (inBuffer: vImage_Buffer, outBuffer: vImage_Buffer, pixelBuffer: UnsafeMutablePointer<Void>)
-
-func createBuffers(image: UIImage, outputScaleX: Float = 1, outputScaleY: Float = 1) -> SIImageBuffers
-{
-    let imageRef = image.CGImage
-    
-    let inProvider = CGImageGetDataProvider(imageRef)
-    let inBitmapData = CGDataProviderCopyData(inProvider)
-    
-    var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
-    
-    var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
-    
-    var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(outputScaleY * Float(CGImageGetHeight(imageRef))), width: UInt(outputScaleX * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
-    
-    var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
-    
-    return imageBuffers
-}
-
 
 struct SIConvolutionKernels
 {
