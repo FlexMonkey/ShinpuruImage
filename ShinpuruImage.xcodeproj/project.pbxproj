@@ -15,6 +15,8 @@
 		3EB16D251B0DAF860014A78D /* ShinpuruImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D241B0DAF860014A78D /* ShinpuruImageTests.swift */; };
 		3EB16D301B0DAF9E0014A78D /* ShinpuruImage_vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */; };
 		3EB16D331B0DB0010014A78D /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D321B0DB0010014A78D /* image.jpg */; };
+		BE98BAF21B11EE63009F1D9F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAF11B11EE30009F1D9F /* Charts.framework */; };
+		BE98BAF31B11EE63009F1D9F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAF11B11EE30009F1D9F /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */; };
 		BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A31B1019C400B3B9B3 /* oculista.jpg */; };
 		BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A41B1019C400B3B9B3 /* vegas.jpg */; };
@@ -38,7 +40,35 @@
 			remoteGlobalIDString = 3EB16D081B0DAF860014A78D;
 			remoteInfo = ShinpuruImage;
 		};
+		BE98BAF01B11EE30009F1D9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE98BAEC1B11EE30009F1D9F /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5BA8EC401A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
+		BE98BAF41B11EE63009F1D9F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE98BAEC1B11EE30009F1D9F /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = Charts;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE98BAF61B11EE63009F1D9F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE98BAF31B11EE63009F1D9F /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3EB16D091B0DAF860014A78D /* ShinpuruImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShinpuruImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +83,7 @@
 		3EB16D241B0DAF860014A78D /* ShinpuruImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShinpuruImageTests.swift; sourceTree = "<group>"; };
 		3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_vImage.swift; sourceTree = "<group>"; };
 		3EB16D321B0DB0010014A78D /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		BE98BAEC1B11EE30009F1D9F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/ios-charts-master/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_CoreImage.swift; sourceTree = "<group>"; };
 		BEF756A31B1019C400B3B9B3 /* oculista.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = oculista.jpg; path = assets/oculista.jpg; sourceTree = "<group>"; };
 		BEF756A41B1019C400B3B9B3 /* vegas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vegas.jpg; path = assets/vegas.jpg; sourceTree = "<group>"; };
@@ -69,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE98BAF21B11EE63009F1D9F /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +117,7 @@
 		3EB16D001B0DAF860014A78D = {
 			isa = PBXGroup;
 			children = (
+				BE98BAEC1B11EE30009F1D9F /* Charts.xcodeproj */,
 				3EB16D0B1B0DAF860014A78D /* ShinpuruImage */,
 				3EB16D211B0DAF860014A78D /* ShinpuruImageTests */,
 				3EB16D0A1B0DAF860014A78D /* Products */,
@@ -162,6 +195,14 @@
 			name = assets;
 			sourceTree = "<group>";
 		};
+		BE98BAED1B11EE30009F1D9F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE98BAF11B11EE30009F1D9F /* Charts.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		BEF756AF1B103D0100B3B9B3 /* shinpuruLayout */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,10 +240,12 @@
 				3EB16D051B0DAF860014A78D /* Sources */,
 				3EB16D061B0DAF860014A78D /* Frameworks */,
 				3EB16D071B0DAF860014A78D /* Resources */,
+				BE98BAF61B11EE63009F1D9F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BE98BAF51B11EE63009F1D9F /* PBXTargetDependency */,
 			);
 			name = ShinpuruImage;
 			productName = ShinpuruImage;
@@ -256,6 +299,12 @@
 			mainGroup = 3EB16D001B0DAF860014A78D;
 			productRefGroup = 3EB16D0A1B0DAF860014A78D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BE98BAED1B11EE30009F1D9F /* Products */;
+					ProjectRef = BE98BAEC1B11EE30009F1D9F /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3EB16D081B0DAF860014A78D /* ShinpuruImage */,
@@ -263,6 +312,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BE98BAF11B11EE30009F1D9F /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = BE98BAF01B11EE30009F1D9F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3EB16D071B0DAF860014A78D /* Resources */ = {
@@ -324,6 +383,11 @@
 			isa = PBXTargetDependency;
 			target = 3EB16D081B0DAF860014A78D /* ShinpuruImage */;
 			targetProxy = 3EB16D1F1B0DAF860014A78D /* PBXContainerItemProxy */;
+		};
+		BE98BAF51B11EE63009F1D9F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Charts;
+			targetProxy = BE98BAF41B11EE63009F1D9F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -25,6 +25,36 @@ import Accelerate
 
 extension UIImage
 {
+    // MARK: Hisogram Functions
+    
+    func SIHistogramCalculation() -> (alpha: [UInt], red: [UInt], green: [UInt], blue: [UInt])
+    {
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var alpha = [UInt](count: 256, repeatedValue: 0)
+        var red = [UInt](count: 256, repeatedValue: 0)
+        var green = [UInt](count: 256, repeatedValue: 0)
+        var blue = [UInt](count: 256, repeatedValue: 0)
+        
+        var alphaPtr = UnsafeMutablePointer<vImagePixelCount>(alpha)
+        var redPtr = UnsafeMutablePointer<vImagePixelCount>(red)
+        var greenPtr = UnsafeMutablePointer<vImagePixelCount>(green)
+        var bluePtr = UnsafeMutablePointer<vImagePixelCount>(blue)
+        
+        var argb = [alphaPtr, redPtr, greenPtr, bluePtr]
+        
+        var histogram = UnsafeMutablePointer<UnsafeMutablePointer<vImagePixelCount>>(argb)
+        
+        var error = vImageHistogramCalculation_ARGB8888(&inBuffer, histogram, UInt32(kvImageNoFlags))
+        
+        return (alpha, red, green, blue)
+    }
+    
     // MARK: Morphology functions
     
     func SIMaxFilter(#width: Int, height: Int) -> UIImage
