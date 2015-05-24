@@ -72,19 +72,24 @@ class ViewController: UIViewController {
 
     func updateImage()
     {
-        let targetColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: CGFloat(1.0))
+        let targetColor = UIColor(red: CGFloat(redSlider.value),
+                                    green: CGFloat(greenSlider.value),
+                                    blue: CGFloat(blueSlider.value),
+                                    alpha: CGFloat(1.0))
         
-        let image = UIImage(named: "vegas.jpg")?.SIWhitePointAdjust(color: targetColor).SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+        let image = UIImage(named: "vegas.jpg")?
+                            .SIWhitePointAdjust(color: targetColor)
+                            .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+        
+        let histogram = image?.SIHistogramCalculation()
         
         original.image = image
         
-        let historgram = image?.SIHistogramCalculation()
-        
         for i: Int in 0 ... 255
         {
-            redChartData[i] = ( ChartDataEntry(value: Float(min(historgram!.red[i], 19000)), xIndex: i) )
-            greenChartData[i] = ( ChartDataEntry(value: Float(min(historgram!.green[i], 19000)), xIndex: i) )
-            blueChartData[i] = ( ChartDataEntry(value: Float(min(historgram!.blue[i], 19000)), xIndex: i) )
+            redChartData[i] = ( ChartDataEntry(value: Float(min(histogram!.red[i], 19000)), xIndex: i) )
+            greenChartData[i] = ( ChartDataEntry(value: Float(min(histogram!.green[i], 19000)), xIndex: i) )
+            blueChartData[i] = ( ChartDataEntry(value: Float(min(histogram!.blue[i], 19000)), xIndex: i) )
         }
         
         let redChartDataSet = LineChartDataSet(yVals: redChartData, label: "red")
@@ -102,7 +107,6 @@ class ViewController: UIViewController {
         blueChartDataSet.setColor(UIColor.blueColor())
         blueChartDataSet.lineWidth = 2
         blueChartDataSet.drawCirclesEnabled = false
-        
         
         chart.data = LineChartData(xVals: foo, dataSets: [redChartDataSet, greenChartDataSet, blueChartDataSet])
     }
