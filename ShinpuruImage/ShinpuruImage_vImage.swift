@@ -46,9 +46,9 @@ extension UIImage
         var greenPtr = UnsafeMutablePointer<vImagePixelCount>(green)
         var bluePtr = UnsafeMutablePointer<vImagePixelCount>(blue)
         
-        var argb = [alphaPtr, redPtr, greenPtr, bluePtr]
+        var rgba = [redPtr, greenPtr, bluePtr, alphaPtr]
         
-        var histogram = UnsafeMutablePointer<UnsafeMutablePointer<vImagePixelCount>>(argb)
+        var histogram = UnsafeMutablePointer<UnsafeMutablePointer<vImagePixelCount>>(rgba)
         
         var error = vImageHistogramCalculation_ARGB8888(&inBuffer, histogram, UInt32(kvImageNoFlags))
         

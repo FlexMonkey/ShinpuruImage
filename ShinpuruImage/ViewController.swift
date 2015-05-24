@@ -12,54 +12,85 @@ import Charts
 class ViewController: UIViewController {
 
     let mainGroup = SLHGroup()
+    let leftGroup = SLVGroup()
+    let rightGroup = SLVGroup()
     
     let original = UIImageView()
     let imageView = UIImageView()
+    
+    let foo = [String](count: 256, repeatedValue: "")
+    var redChartData = [ChartDataEntry](count: 256, repeatedValue: ChartDataEntry())
+    var greenChartData = [ChartDataEntry](count: 256, repeatedValue: ChartDataEntry())
+    var blueChartData = [ChartDataEntry](count: 256, repeatedValue: ChartDataEntry())
+    
+    let redSlider = LabelledSlider(title: "Red")
+    let greenSlider = LabelledSlider(title: "Green")
+    let blueSlider = LabelledSlider(title: "Blue")
+
+    let saturationSlider = LabelledSlider(title: "Saturation", minimumValue: 0, maximumValue: 2)
+    let brightnessSlider = LabelledSlider(title: "Brightness", minimumValue: -1, maximumValue: 1)
+    let contrastSlider = LabelledSlider(title: "Contrast", minimumValue: 0, maximumValue: 2)
+    
+    let chart = LineChartView()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         mainGroup.margin = 20
-        
-        // mainGroup.children = [RotateAndScale(), ColorControls()]
-        
-        
-        
+        leftGroup.margin = 10
+ 
         original.contentMode = UIViewContentMode.ScaleAspectFit
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         view.addSubview(mainGroup)
-        
-        original.image = UIImage(named: "oculista.jpg")
-        
-        let historgram = UIImage(named: "oculista.jpg")?.SIHistogramCalculation()
-        
-        let chart = LineChartView()
 
         chart.backgroundColor = UIColor.lightGrayColor()
 
-        var redChartData = [ChartDataEntry]()
-        var greenChartData = [ChartDataEntry]()
-        var blueChartData = [ChartDataEntry]()
+        redSlider.value = 1
+        greenSlider.value = 1
+        blueSlider.value = 1
         
-        for (i: Int, value: UInt) in enumerate(historgram!.alpha)
+        saturationSlider.value = 2
+        brightnessSlider.value = 0
+        contrastSlider.value = 1
+        
+        redSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        greenSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        blueSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+
+        saturationSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        brightnessSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        contrastSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        
+        rightGroup.children = [original, chart]
+        leftGroup.children = [redSlider, greenSlider, blueSlider, saturationSlider, brightnessSlider, contrastSlider]
+        mainGroup.children = [leftGroup, rightGroup]
+        
+        updateImage()
+    }
+
+    func updateImage()
+    {
+        let targetColor = UIColor(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: CGFloat(1.0))
+        
+        let image = UIImage(named: "vegas.jpg")?.SIWhitePointAdjust(color: targetColor).SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+        
+        original.image = image
+        
+        let historgram = image?.SIHistogramCalculation()
+        
+        for i: Int in 0 ... 255
         {
-            redChartData.append( ChartDataEntry(value: Float(min(value, 19000)), xIndex: i) )
-        }
-        for (i: Int, value: UInt) in enumerate(historgram!.red)
-        {
-            greenChartData.append( ChartDataEntry(value: Float(min(value, 19000)), xIndex: i) )
-        }
-        for (i: Int, value: UInt) in enumerate(historgram!.green)
-        {
-            blueChartData.append( ChartDataEntry(value: Float(min(value, 19000)), xIndex: i) )
+            redChartData[i] = ( ChartDataEntry(value: Float(min(historgram!.red[i], 19000)), xIndex: i) )
+            greenChartData[i] = ( ChartDataEntry(value: Float(min(historgram!.green[i], 19000)), xIndex: i) )
+            blueChartData[i] = ( ChartDataEntry(value: Float(min(historgram!.blue[i], 19000)), xIndex: i) )
         }
         
         let redChartDataSet = LineChartDataSet(yVals: redChartData, label: "red")
         let greenChartDataSet = LineChartDataSet(yVals: greenChartData, label: "green")
         let blueChartDataSet = LineChartDataSet(yVals: blueChartData, label: "blue")
-
+        
         redChartDataSet.setColor(UIColor.redColor())
         redChartDataSet.lineWidth = 2
         redChartDataSet.drawCirclesEnabled = false
@@ -72,12 +103,10 @@ class ViewController: UIViewController {
         blueChartDataSet.lineWidth = 2
         blueChartDataSet.drawCirclesEnabled = false
         
-        let foo = [String](count: 256, repeatedValue: "")
+        
         chart.data = LineChartData(xVals: foo, dataSets: [redChartDataSet, greenChartDataSet, blueChartDataSet])
- 
-        mainGroup.children = [original, chart]
     }
-
+    
     override func viewDidLayoutSubviews()
     {
         let top = topLayoutGuide.length
