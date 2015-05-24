@@ -63,6 +63,8 @@
 
 * `func SIDilateFilter(#kernel: [UInt8]) -> UIImage` [Dilates an object](https://developer.apple.com/library/mac/documentation/Performance/Reference/vImage_morphological/#//apple_ref/doc/uid/TP40005492-CH210-DontLinkElementID_1)
 * `func SIErodeFilter(#kernel: [UInt8]) -> UIImage` [Erodes an object](https://developer.apple.com/library/mac/documentation/Performance/Reference/vImage_morphological/#//apple_ref/doc/uid/TP40005492-CH210-DontLinkElementID_2)
+* `func SIMaxFilter(#width: Int, height: Int) -> UIImage` The morphological operation Max is a special case of the dilation operation whereby all the elements of the kernel have the same value. 
+*  `func SIMinFilter(#width: Int, height: Int) -> UIImage` The morphological operation Min is a special case of the erosion operation whereby all the elements of the kernel have the same value.
 
 ### High Level Geometry Functions
 
