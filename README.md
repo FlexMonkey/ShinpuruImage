@@ -26,57 +26,59 @@
 
 ### Photo Effects
 
-* `func SIPhotoEffectNoir() -> UIImage`
-* `func SIPhotoEffectChrome() -> UIImage`
-* `func SIPhotoEffectFade() -> UIImage`
-* `func SIPhotoEffectInstant() -> UIImage`
-* `func SIPhotoEffectMono() -> UIImage`
-* `func SIPhotoEffectProcess() -> UIImage`
-* `func SIPhotoEffectTonal() -> UIImage`
-* `func SIPhotoEffectTransfer() -> UIImage`
+* `func SIPhotoEffectNoir() -> UIImage` Applies a preconfigured set of effects that imitate black-and-white photography film with exaggerated contrast.
+* `func SIPhotoEffectChrome() -> UIImage` Applies a preconfigured set of effects that imitate vintage photography film with exaggerated color.
+* `func SIPhotoEffectFade() -> UIImage` Applies a preconfigured set of effects that imitate vintage photography film with diminished color.
+* `func SIPhotoEffectInstant() -> UIImage` Applies a preconfigured set of effects that imitate vintage photography film with distorted colors.
+* `func SIPhotoEffectMono() -> UIImage` Applies a preconfigured set of effects that imitate black-and-white photography film with low contrast.
+* `func SIPhotoEffectProcess() -> UIImage` Applies a preconfigured set of effects that imitate vintage photography film with emphasized cool colors.
+* `func SIPhotoEffectTonal() -> UIImage` Applies a preconfigured set of effects that imitate black-and-white photography film without significantly altering contrast.
+* `func SIPhotoEffectTransfer() -> UIImage` Applies a preconfigured set of effects that imitate vintage photography film with emphasized warm colors.
 
 ### Color Effects
 
-* `func SIFalseColor(#color0: UIColor, color1: UIColor) -> UIImage`
-* `func SIPosterize(#levels: Int) -> UIImage`
-* `func SIMonochrome(#color: UIColor, intensity: Float) -> UIImage`
+* `func SIFalseColor(#color0: UIColor, color1: UIColor) -> UIImage` Maps luminance to a color ramp of two colors.
+* `func SIPosterize(#levels: Int) -> UIImage` Remaps red, green, and blue color components to the number of brightness values you specify for each color component.
+* `func SIMonochrome(#color: UIColor, intensity: Float) -> UIImage` Remaps colors so they fall within shades of a single color.
 
 ### Stylize
 
-* `func SIBloom(#radius: Float, intensity: Float) -> UIImage`
-* `func SIGloom(#radius: Float, intensity: Float) -> UIImage`
-* `func SIPixellate(#scale: Float) -> UIImage`
+* `func SIBloom(#radius: Float, intensity: Float) -> UIImage` Softens edges and applies a pleasant glow to an image.
+* `func SIGloom(#radius: Float, intensity: Float) -> UIImage` Dulls the highlights of an image.
+* `func SIPixellate(#scale: Float) -> UIImage` Makes an image blocky by mapping the image to colored squares whose color is defined by the replaced pixels.
 
 ### Blur
 
-* `func SIGaussianBlur(#radius: Float) -> UIImage`
+* `func SIGaussianBlur(#radius: Float) -> UIImage` Spreads source pixels by an amount specified by a Gaussian distribution.
 
 ### Color Adjustment
 
-* `func SIColorControls(#saturation: Float, brightness: Float, contrast: Float) -> UIImage`
-* `func SIExposureAdjust(#ev: Float) -> UIImage`
-* `func SIGammaAdjust(#power: Float) -> UIImage`
-* `func SIVibrance(#amount: Float) -> UIImage`
-* `func SIWhitePointAdjust(#color: UIColor) -> UIImage`
+* `func SIColorControls(#saturation: Float, brightness: Float, contrast: Float) -> UIImage` Adjusts saturation, brightness, and contrast values.
+* `func SIExposureAdjust(#ev: Float) -> UIImage` Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
+* `func SIGammaAdjust(#power: Float) -> UIImage` Adjusts midtone brightness.
+* `func SIVibrance(#amount: Float) -> UIImage` Adjusts the saturation of an image while keeping pleasing skin tones.
+* `func SIWhitePointAdjust(#color: UIColor) -> UIImage` Adjusts the reference white point for an image and maps all colors in the source using the new reference.
 
 ### Morphology functions
 
-* `func SIDilateFilter(#kernel: [UInt8]) -> UIImage`
-* `func SIErodeFilter(#kernel: [UInt8]) -> UIImage`
+* `func SIDilateFilter(#kernel: [UInt8]) -> UIImage` [Dilates an object](https://developer.apple.com/library/mac/documentation/Performance/Reference/vImage_morphological/#//apple_ref/doc/uid/TP40005492-CH210-DontLinkElementID_1)
+* `func SIErodeFilter(#kernel: [UInt8]) -> UIImage` [Erodes an object](https://developer.apple.com/library/mac/documentation/Performance/Reference/vImage_morphological/#//apple_ref/doc/uid/TP40005492-CH210-DontLinkElementID_2)
+* `func SIMaxFilter(#width: Int, height: Int) -> UIImage` The morphological operation Max is a special case of the dilation operation whereby all the elements of the kernel have the same value. 
+*  `func SIMinFilter(#width: Int, height: Int) -> UIImage` The morphological operation Min is a special case of the erosion operation whereby all the elements of the kernel have the same value.
 
 ### High Level Geometry Functions
 
-* `func SIScale(#scaleX: Float, scaleY: Float) -> UIImage`
-* `func SIRotate(#angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
-* `func SIRotateNinety(rotation: RotateNinety, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
-* `func SIHorizontalReflect() -> UIImage`
-* `func SIVerticalReflect() -> UIImage`
+* `func SIScale(#scaleX: Float, scaleY: Float) -> UIImage` Resize the input image
+* `func SIRotate(#angle: Float, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` Rotate the input image around a center point by any amount
+* `func SIRotateNinety(rotation: RotateNinety, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` Rotate an image by 0, 90, 180 or 270 degrees
+* `func SIHorizontalReflect() -> UIImage` Reflect an image across a  mirror plane at the center of the image 
+* `func SIVerticalReflect() -> UIImage` Reflect an image across a  mirror plane at the center of the image 
 
 ### Convolution
 
-* `func SIBoxBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
-* `func SIFastBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
-* `func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage`
+* `func SIBoxBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` Apply a mean filter to the image.
+* `func SIFastBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` Apply a tent filter to the image.
+* `func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` All four channel convolution function
 
 ## Demo Application
 
