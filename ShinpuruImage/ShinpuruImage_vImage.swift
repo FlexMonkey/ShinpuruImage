@@ -27,6 +27,60 @@ extension UIImage
 {
     // MARK: Morphology functions
     
+    func SIMaxFilter(#width: Int, height: Int) -> UIImage
+    {
+        let oddWidth = UInt(width % 2 == 0 ? width + 1 : width)
+        let oddHeight = UInt(height % 2 == 0 ? height + 1 : height)
+
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(1 * Float(CGImageGetHeight(imageRef))), width: UInt(1 * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
+        
+        var error = vImageMax_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, 0, 0, oddHeight, oddWidth, UInt32(kvImageNoFlags))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
+    func SIMinFilter(#width: Int, height: Int) -> UIImage
+    {
+        let oddWidth = UInt(width % 2 == 0 ? width + 1 : width)
+        let oddHeight = UInt(height % 2 == 0 ? height + 1 : height)
+        
+        let imageRef = self.CGImage
+        
+        let inProvider = CGImageGetDataProvider(imageRef)
+        let inBitmapData = CGDataProviderCopyData(inProvider)
+        
+        var inBuffer = vImage_Buffer(data: UnsafeMutablePointer(CFDataGetBytePtr(inBitmapData)), height: UInt(CGImageGetHeight(imageRef)), width: UInt(CGImageGetWidth(imageRef)), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var pixelBuffer = malloc(CGImageGetBytesPerRow(imageRef) * CGImageGetHeight(imageRef))
+        
+        var outBuffer = vImage_Buffer(data: pixelBuffer, height: UInt(1 * Float(CGImageGetHeight(imageRef))), width: UInt(1 * Float(CGImageGetWidth(imageRef))), rowBytes: CGImageGetBytesPerRow(imageRef))
+        
+        var imageBuffers = SIImageBuffers(inBuffer: inBuffer, outBuffer: outBuffer, pixelBuffer: pixelBuffer)
+        
+        var error = vImageMin_ARGB8888(&imageBuffers.inBuffer, &imageBuffers.outBuffer, nil, 0, 0, oddHeight, oddWidth, UInt32(kvImageNoFlags))
+        
+        let outImage = UIImage(fromvImageOutBuffer: imageBuffers.outBuffer, scale: self.scale, orientation: .Up)
+        
+        free(imageBuffers.pixelBuffer)
+        
+        return outImage!
+    }
+    
     func SIDilateFilter(#kernel: [UInt8]) -> UIImage
     {
         precondition(kernel.count == 9 || kernel.count == 25 || kernel.count == 49, "Kernel size must be 3x3, 5x5 or 7x7.")
