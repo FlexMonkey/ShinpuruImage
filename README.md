@@ -82,7 +82,7 @@
 
 ### Histogram
 
-![Screenshot](/ShinpuruImage/assets/HistogramScreenShot.jpg)
+<img src="/ShinpuruImage/assets/HistogramScreenShot.jpg" align="center" width="300" >
 
 * `func SIHistogramCalculation() -> (alpha: [UInt], red: [UInt], green: [UInt], blue: [UInt])` Returns a tuple containing four arrays of 256 `UInt` representing the histogram of the supplied image
 
