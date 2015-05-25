@@ -17,6 +17,8 @@
 		3EB16D331B0DB0010014A78D /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D321B0DB0010014A78D /* image.jpg */; };
 		BE98BAFD1B12142C009F1D9F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAFC1B12141E009F1D9F /* Charts.framework */; };
 		BE98BAFE1B12142C009F1D9F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAFC1B12141E009F1D9F /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE98BB031B132BBF009F1D9F /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE98BB021B132BBF009F1D9F /* Histogram.swift */; };
+		BE98BB051B132D47009F1D9F /* glass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE98BB041B132D47009F1D9F /* glass.jpg */; };
 		BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */; };
 		BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A31B1019C400B3B9B3 /* oculista.jpg */; };
 		BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A41B1019C400B3B9B3 /* vegas.jpg */; };
@@ -84,6 +86,8 @@
 		3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_vImage.swift; sourceTree = "<group>"; };
 		3EB16D321B0DB0010014A78D /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		BE98BAF71B12141E009F1D9F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ShinpuruImage/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
+		BE98BB021B132BBF009F1D9F /* Histogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
+		BE98BB041B132D47009F1D9F /* glass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = glass.jpg; path = assets/glass.jpg; sourceTree = "<group>"; };
 		BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_CoreImage.swift; sourceTree = "<group>"; };
 		BEF756A31B1019C400B3B9B3 /* oculista.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = oculista.jpg; path = assets/oculista.jpg; sourceTree = "<group>"; };
 		BEF756A41B1019C400B3B9B3 /* vegas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vegas.jpg; path = assets/vegas.jpg; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 			children = (
 				BEF756BC1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG */,
 				BEF756A31B1019C400B3B9B3 /* oculista.jpg */,
+				BE98BB041B132D47009F1D9F /* glass.jpg */,
 				BEF756A41B1019C400B3B9B3 /* vegas.jpg */,
 				3EB16D321B0DB0010014A78D /* image.jpg */,
 			);
@@ -217,6 +222,7 @@
 			children = (
 				BEF756B51B10847300B3B9B3 /* widgets */,
 				BEF756B81B10854B00B3B9B3 /* RotateAndScale.swift */,
+				BE98BB021B132BBF009F1D9F /* Histogram.swift */,
 				BEF756BA1B108F3300B3B9B3 /* ColorControls.swift */,
 			);
 			name = demoComponents;
@@ -330,6 +336,7 @@
 			files = (
 				3EB16D331B0DB0010014A78D /* image.jpg in Resources */,
 				BEF756BD1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG in Resources */,
+				BE98BB051B132D47009F1D9F /* glass.jpg in Resources */,
 				3EB16D141B0DAF860014A78D /* Main.storyboard in Resources */,
 				BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */,
 				3EB16D191B0DAF860014A78D /* LaunchScreen.xib in Resources */,
@@ -360,6 +367,7 @@
 				BEF756B71B10849300B3B9B3 /* LabelledSlider.swift in Sources */,
 				BEF756B31B103D6400B3B9B3 /* SLGroup.swift in Sources */,
 				BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */,
+				BE98BB031B132BBF009F1D9F /* Histogram.swift in Sources */,
 				3EB16D111B0DAF860014A78D /* ViewController.swift in Sources */,
 				BEF756BB1B108F3300B3B9B3 /* ColorControls.swift in Sources */,
 				3EB16D0F1B0DAF860014A78D /* AppDelegate.swift in Sources */,
