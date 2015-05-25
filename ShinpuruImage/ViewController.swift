@@ -23,19 +23,31 @@ class ViewController: UIViewController {
     var greenChartData = [ChartDataEntry](count: 256, repeatedValue: ChartDataEntry())
     var blueChartData = [ChartDataEntry](count: 256, repeatedValue: ChartDataEntry())
     
-    let redSlider = LabelledSlider(title: "Red")
-    let greenSlider = LabelledSlider(title: "Green")
-    let blueSlider = LabelledSlider(title: "Blue")
+    let redSlider = LabelledSlider(title: "White Point Red")
+    let greenSlider = LabelledSlider(title: "White Point Green")
+    let blueSlider = LabelledSlider(title: "White Point Blue")
 
     let saturationSlider = LabelledSlider(title: "Saturation", minimumValue: 0, maximumValue: 2)
     let brightnessSlider = LabelledSlider(title: "Brightness", minimumValue: -1, maximumValue: 1)
     let contrastSlider = LabelledSlider(title: "Contrast", minimumValue: 0, maximumValue: 2)
+    
+    let gammaSlider = LabelledSlider(title: "Gamma", minimumValue: 0, maximumValue: 4)
     
     let chart = LineChartView()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        let left = chart.getAxis(ChartYAxis.AxisDependency.Left)
+        left.customAxisMax = 20_000
+        left.drawLabelsEnabled = false
+ 
+        let right = chart.getAxis(ChartYAxis.AxisDependency.Right)
+        right.customAxisMax = 20_000
+        right.drawLabelsEnabled = false
+       
+        chart.descriptionText = ""
         
         mainGroup.margin = 20
         leftGroup.margin = 10
@@ -55,6 +67,8 @@ class ViewController: UIViewController {
         brightnessSlider.value = 0
         contrastSlider.value = 1
         
+        gammaSlider.value = 1
+        
         redSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         greenSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         blueSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
@@ -63,8 +77,10 @@ class ViewController: UIViewController {
         brightnessSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         contrastSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         
+        gammaSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        
         rightGroup.children = [original, chart]
-        leftGroup.children = [redSlider, greenSlider, blueSlider, saturationSlider, brightnessSlider, contrastSlider]
+        leftGroup.children = [redSlider, greenSlider, blueSlider, saturationSlider, brightnessSlider, contrastSlider, gammaSlider]
         mainGroup.children = [leftGroup, rightGroup]
         
         updateImage()
@@ -80,6 +96,7 @@ class ViewController: UIViewController {
         let image = UIImage(named: "vegas.jpg")?
                             .SIWhitePointAdjust(color: targetColor)
                             .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+                            .SIGammaAdjust(power: gammaSlider.value)
         
         let histogram = image?.SIHistogramCalculation()
         
@@ -87,9 +104,9 @@ class ViewController: UIViewController {
         
         for i: Int in 0 ... 255
         {
-            redChartData[i] = ( ChartDataEntry(value: Float(min(histogram!.red[i], 19000)), xIndex: i) )
-            greenChartData[i] = ( ChartDataEntry(value: Float(min(histogram!.green[i], 19000)), xIndex: i) )
-            blueChartData[i] = ( ChartDataEntry(value: Float(min(histogram!.blue[i], 19000)), xIndex: i) )
+            redChartData[i] = ( ChartDataEntry(value: Float(histogram!.red[i]), xIndex: i) )
+            greenChartData[i] = ( ChartDataEntry(value: Float(histogram!.green[i]), xIndex: i) )
+            blueChartData[i] = ( ChartDataEntry(value: Float(histogram!.blue[i]), xIndex: i) )
         }
         
         let redChartDataSet = LineChartDataSet(yVals: redChartData, label: "red")
@@ -108,7 +125,9 @@ class ViewController: UIViewController {
         blueChartDataSet.lineWidth = 2
         blueChartDataSet.drawCirclesEnabled = false
         
-        chart.data = LineChartData(xVals: foo, dataSets: [redChartDataSet, greenChartDataSet, blueChartDataSet])
+        let lineChartData = LineChartData(xVals: foo, dataSets: [redChartDataSet, greenChartDataSet, blueChartDataSet])
+  
+        chart.data = lineChartData
     }
     
     override func viewDidLayoutSubviews()
