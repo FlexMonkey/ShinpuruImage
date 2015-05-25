@@ -26,7 +26,7 @@ class Histogram: SLHGroup
     let greenSlider = LabelledSlider(title: "White Point Green")
     let blueSlider = LabelledSlider(title: "White Point Blue")
     
-    let saturationSlider = LabelledSlider(title: "Saturation", minimumValue: 0, maximumValue: 2)
+    let saturationSlider = LabelledSlider(title: "Saturation", minimumValue: 0, maximumValue: 4)
     let brightnessSlider = LabelledSlider(title: "Brightness", minimumValue: -1, maximumValue: 1)
     let contrastSlider = LabelledSlider(title: "Contrast", minimumValue: 0, maximumValue: 2)
     
