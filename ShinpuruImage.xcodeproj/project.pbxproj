@@ -185,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */,
-				BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */,
 				BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */,
 			);
 			name = shinpuruImage;
@@ -195,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				BEF756BC1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG */,
+				BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */,
 				BEF756A31B1019C400B3B9B3 /* oculista.jpg */,
 				BE98BB041B132D47009F1D9F /* glass.jpg */,
 				BEF756A41B1019C400B3B9B3 /* vegas.jpg */,
