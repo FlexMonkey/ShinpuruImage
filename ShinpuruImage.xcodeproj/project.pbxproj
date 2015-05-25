@@ -19,6 +19,7 @@
 		BE98BAFE1B12142C009F1D9F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAFC1B12141E009F1D9F /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE98BB031B132BBF009F1D9F /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE98BB021B132BBF009F1D9F /* Histogram.swift */; };
 		BE98BB051B132D47009F1D9F /* glass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE98BB041B132D47009F1D9F /* glass.jpg */; };
+		BE98BB071B133832009F1D9F /* HistogramScreenShot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */; };
 		BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */; };
 		BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A31B1019C400B3B9B3 /* oculista.jpg */; };
 		BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A41B1019C400B3B9B3 /* vegas.jpg */; };
@@ -88,6 +89,7 @@
 		BE98BAF71B12141E009F1D9F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ShinpuruImage/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		BE98BB021B132BBF009F1D9F /* Histogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 		BE98BB041B132D47009F1D9F /* glass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = glass.jpg; path = assets/glass.jpg; sourceTree = "<group>"; };
+		BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = HistogramScreenShot.jpg; path = assets/HistogramScreenShot.jpg; sourceTree = "<group>"; };
 		BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_CoreImage.swift; sourceTree = "<group>"; };
 		BEF756A31B1019C400B3B9B3 /* oculista.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = oculista.jpg; path = assets/oculista.jpg; sourceTree = "<group>"; };
 		BEF756A41B1019C400B3B9B3 /* vegas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vegas.jpg; path = assets/vegas.jpg; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */,
+				BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */,
 				BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */,
 			);
 			name = shinpuruImage;
@@ -341,6 +344,7 @@
 				BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */,
 				3EB16D191B0DAF860014A78D /* LaunchScreen.xib in Resources */,
 				BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */,
+				BE98BB071B133832009F1D9F /* HistogramScreenShot.jpg in Resources */,
 				3EB16D161B0DAF860014A78D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
