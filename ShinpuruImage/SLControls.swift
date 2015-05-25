@@ -26,6 +26,12 @@ public class SLLabel: UILabel, SLLayoutItem
     public var explicitSize: CGFloat?
 }
 
+public class SLSegmentedControl: UISegmentedControl, SLLayoutItem
+{
+    public var percentageSize: CGFloat?
+    public var explicitSize: CGFloat?
+}
+
 public class SLButton: UIButton, SLLayoutItem
 {
     public var percentageSize: CGFloat?
