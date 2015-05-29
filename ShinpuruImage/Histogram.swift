@@ -14,7 +14,6 @@ class Histogram: SLHGroup
     let leftGroup = SLVGroup()
     let rightGroup = SLVGroup()
     
-    let original = UIImageView()
     let imageView = UIImageView()
     
     let foo = [String](count: 256, repeatedValue: "")
@@ -51,7 +50,6 @@ class Histogram: SLHGroup
         margin = 20
         leftGroup.margin = 10
         
-        original.contentMode = UIViewContentMode.ScaleAspectFit
         imageView.contentMode = UIViewContentMode.ScaleAspectFit
         
         chart.backgroundColor = UIColor.lightGrayColor()
@@ -76,7 +74,7 @@ class Histogram: SLHGroup
         
         gammaSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         
-        rightGroup.children = [original, chart]
+        rightGroup.children = [imageView, chart]
         leftGroup.children = [redSlider, greenSlider, blueSlider, saturationSlider, brightnessSlider, contrastSlider, gammaSlider]
         
         children = [leftGroup, rightGroup]
@@ -98,14 +96,14 @@ class Histogram: SLHGroup
         
         let histogram = image?.SIHistogramCalculation()
         
-        original.image = image
+        imageView.image = image
         
-        for i: Int in 0 ... 255
-        {
-            redChartData[i] = ( ChartDataEntry(value: Float(histogram!.red[i]), xIndex: i) )
-            greenChartData[i] = ( ChartDataEntry(value: Float(histogram!.green[i]), xIndex: i) )
-            blueChartData[i] = ( ChartDataEntry(value: Float(histogram!.blue[i]), xIndex: i) )
-        }
+    for i: Int in 0 ... 255
+    {
+        redChartData[i] = ( ChartDataEntry(value: Float(histogram!.red[i]), xIndex: i) )
+        greenChartData[i] = ( ChartDataEntry(value: Float(histogram!.green[i]), xIndex: i) )
+        blueChartData[i] = ( ChartDataEntry(value: Float(histogram!.blue[i]), xIndex: i) )
+    }
         
         let redChartDataSet = LineChartDataSet(yVals: redChartData, label: "red")
         let greenChartDataSet = LineChartDataSet(yVals: greenChartData, label: "green")
@@ -123,9 +121,9 @@ class Histogram: SLHGroup
         blueChartDataSet.lineWidth = 2
         blueChartDataSet.drawCirclesEnabled = false
         
-        let lineChartData = LineChartData(xVals: foo, dataSets: [redChartDataSet, greenChartDataSet, blueChartDataSet])
-        
-        chart.data = lineChartData
+    let lineChartData = LineChartData(xVals: foo, dataSets: [redChartDataSet, greenChartDataSet, blueChartDataSet])
+    
+    chart.data = lineChartData
     }
     
     required init(coder aDecoder: NSCoder) {
