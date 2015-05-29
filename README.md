@@ -80,12 +80,19 @@
 * `func SIFastBlur(#width: Int, height: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` Apply a tent filter to the image.
 * `func SIConvolutionFilter(#kernel: [Int16], divisor: Int, backgroundColor: UIColor = UIColor.blackColor()) -> UIImage` All four channel convolution function
 
+### Histogram
+
+<img src="/ShinpuruImage/assets/HistogramScreenShot.jpg" align="center" width="300" >
+
+* `func SIHistogramCalculation() -> (alpha: [UInt], red: [UInt], green: [UInt], blue: [UInt])` Returns a tuple containing four arrays of 256 `UInt` representing the histogram of the supplied image
+
 ## Demo Application
 
-The demo app contains two components:
+The demo app contains three components:
 
 * *[RotateAndScale](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/RotateAndScale.swift)* - demonstrates chained `SIScale()` and `SIRotate()` controlled by three numeric sliders
 * *[ColorControls](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ColorControls.swift)* - demonstrates `SIColorControls` controlled by three numeric sliders
+* *[Histogram](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/Histogram.swift)* - uses [ios-charts](https://github.com/danielgindi/ios-charts) to demonstrate the use of `SIHistogramCalculation`
 
 ## Performance 
 
