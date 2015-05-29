@@ -12,44 +12,68 @@ import XCTest
 class ShinpuruImageTests: XCTestCase
 {
     var image: UIImage!
+    var imageView: UIImageView!
 
     override func setUp()
     {
         super.setUp()
         
         image = UIImage(named: "oculista.jpg")!
+        imageView = UIImageView()
+    }
+    
+    override func tearDown()
+    {
+        super.tearDown()
+        
+        image = nil
+        imageView = nil
     }
     
     func testUIImageChaining()
     {
-        super.setUp()
-        
         self.measureBlock()
         {
-                println("testUIImageChaining")
+            let chained = self.image
+                .SIPhotoEffectFade()
+                .SIGaussianBlur(radius: 5)
+                .SIPhotoEffectInstant()
+                .SIPhotoEffectNoir()
+                .SIGaussianBlur(radius: 5)
+                .SIPhotoEffectProcess()
+                .SIPhotoEffectTonal()
+                .SIPhotoEffectProcess()
+                .SIPhotoEffectTonal()
+                .SIGaussianBlur(radius: 6)
+                .SIBloom(radius: 20, intensity: 20)
+                .SIColorControls(saturation: 0.5, brightness: 1, contrast: 2)
+                .SIWhitePointAdjust(color: UIColor.yellowColor())
             
-                let chained = self.image.SIWhitePointAdjust(color: UIColor.blueColor())
-                    .SIGaussianBlur(radius: 5)
-                    .SIPixellate(scale: 5)
-                    .SIBloom(radius: 1, intensity: 5)
-                    .SIColorControls(saturation: 5, brightness: 1, contrast: 2)
+            self.imageView.image = chained
         }
     }
     
     func testCIImageChaining()
     {
-        super.setUp()
-        
         self.measureBlock()
-            {
-                
-                
-                let chained = SIChainableImage(image: self.image).SIWhitePointAdjust(color: UIColor.blueColor())
-                    .SIGaussianBlur(radius: 5)
-                    .SIPixellate(scale: 5)
-                    .SIBloom(radius: 1, intensity: 5)
-                    .SIColorControls(saturation: 5, brightness: 1, contrast: 2)
-                    .toUIImage()
+        {
+            let chained = SIChainableImage(image: self.image)
+                .SIPhotoEffectFade()
+                .SIGaussianBlur(radius: 5)
+                .SIPhotoEffectInstant()
+                .SIPhotoEffectNoir()
+                .SIGaussianBlur(radius: 5)
+                .SIPhotoEffectProcess()
+                .SIPhotoEffectTonal()
+                .SIPhotoEffectProcess()
+                .SIPhotoEffectTonal()
+                .SIGaussianBlur(radius: 6)
+                .SIBloom(radius: 20, intensity: 20)
+                .SIColorControls(saturation: 0.5, brightness: 1, contrast: 2)
+                .SIWhitePointAdjust(color: UIColor.yellowColor())
+                .toUIImage()
+            
+            self.imageView.image = chained
         }
     }
     
