@@ -20,6 +20,40 @@ class ShinpuruImageTests: XCTestCase
         image = UIImage(named: "oculista.jpg")!
     }
     
+    func testUIImageChaining()
+    {
+        super.setUp()
+        
+        self.measureBlock()
+        {
+                println("testUIImageChaining")
+            
+                let chained = self.image.SIWhitePointAdjust(color: UIColor.blueColor())
+                    .SIGaussianBlur(radius: 5)
+                    .SIPixellate(scale: 5)
+                    .SIBloom(radius: 1, intensity: 5)
+                    .SIColorControls(saturation: 5, brightness: 1, contrast: 2)
+        }
+    }
+    
+    func testCIImageChaining()
+    {
+        super.setUp()
+        
+        self.measureBlock()
+            {
+                
+                
+                let chained = SIChainableImage(image: self.image).SIWhitePointAdjust(color: UIColor.blueColor())
+                    .SIGaussianBlur(radius: 5)
+                    .SIPixellate(scale: 5)
+                    .SIBloom(radius: 1, intensity: 5)
+                    .SIColorControls(saturation: 5, brightness: 1, contrast: 2)
+                    .toUIImage()
+        }
+    }
+    
+    /*
     // 0.311 sec on iPad Air 2
     // 0.348 sec on iPhone 6
     func testPerformanceSIFastBlur()
@@ -58,5 +92,5 @@ class ShinpuruImageTests: XCTestCase
             }
         }
     }
-    
+    */
 }

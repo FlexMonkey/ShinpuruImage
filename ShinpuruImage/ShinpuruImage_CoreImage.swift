@@ -187,11 +187,92 @@ extension UIImage
     }
 }
 
+extension CIImage
+{
+    func SIGaussianBlur(#radius: Float) -> CIImage
+    {
+        let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
+        
+        let filterName = "CIGaussianBlur"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius])
+    }
+    
+    func SIWhitePointAdjust(#color: UIColor) -> CIImage
+    {
+        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color)!)
+        
+        let filterName = "CIWhitePointAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputColor])
+    }
+    
+    func SIPixellate(#scale: Float) -> CIImage
+    {
+        let inputScale = KeyValuePair(key: "inputScale", value: scale)
+        
+        let filterName = "CIPixellate"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputScale])
+    }
+    
+    func SIBloom(#radius: Float, intensity: Float) -> CIImage
+    {
+        let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
+        let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
+        
+        let filterName = "CIBloom"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius, inputIntensity])
+    }
+    
+    func SIColorControls(#saturation: Float, brightness: Float, contrast: Float) -> CIImage
+    {
+        let inputSaturation = KeyValuePair(key: "inputSaturation", value: saturation)
+        let inputBrightness = KeyValuePair(key: "inputBrightness", value: brightness)
+        let inputContrast = KeyValuePair(key: "inputContrast", value: contrast)
+        
+        let filterName = "CIColorControls"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputSaturation, inputBrightness, inputContrast])
+    }
+    
+    func SIGammaAdjust(#power: Float) -> CIImage
+    {
+        let inputPower = KeyValuePair(key: "inputPower", value: power)
+        
+        let filterName = "CIGammaAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputPower])
+    }
+    
+    func toUIImage() -> UIImage
+    {
+        let filteredImageRef = ShinpuruCoreImageHelper.ciContext.createCGImage(self, fromRect: self.extent())
+
+        let filteredImage = UIImage(CGImage: filteredImageRef)!
+        
+        return filteredImage
+    }
+}
+
 // MARK: Utilities
 
 class ShinpuruCoreImageHelper
 {
     static let ciContext = CIContext(options: nil)
+    
+    static func applyFilter(image: CIImage, filterName: String, keyValuePairs: [KeyValuePair]) -> CIImage
+    {
+        let ciFilter = CIFilter(name: filterName)
+        
+        let inputImage = KeyValuePair(key: kCIInputImageKey, value: image)
+        ciFilter.setValue(inputImage.value, forKey: inputImage.key)
+        
+        keyValuePairs.map({ ciFilter.setValue($0.value, forKey: $0.key) })
+        
+        return ciFilter.valueForKey(kCIOutputImageKey) as! CIImage!
+    }
     
     static func applyFilter(image: UIImage, filterName: String, keyValuePairs: [KeyValuePair]) -> UIImage
     {
@@ -200,16 +281,13 @@ class ShinpuruCoreImageHelper
         let inputImage = KeyValuePair(key: kCIInputImageKey, value: CIImage(image: image))
         ciFilter.setValue(inputImage.value, forKey: inputImage.key)
         
-        for keyValuePair in keyValuePairs
-        {
-            ciFilter.setValue(keyValuePair.value, forKey: keyValuePair.key)
-        }
+        keyValuePairs.map({ ciFilter.setValue($0.value, forKey: $0.key) })
         
         var filteredImageData = ciFilter.valueForKey(kCIOutputImageKey) as! CIImage!
         var filteredImageRef: CGImage!
         
         filteredImageRef = ciContext.createCGImage(filteredImageData, fromRect: filteredImageData.extent())
-        
+
         var filteredImage = UIImage(CGImage: filteredImageRef)!
         
         filteredImageData = nil
@@ -219,4 +297,5 @@ class ShinpuruCoreImageHelper
     }
 }
 
+typealias SIChainableImage = CIImage
 typealias KeyValuePair = (key:String, value: AnyObject)
