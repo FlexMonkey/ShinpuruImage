@@ -99,7 +99,9 @@ The demo app contains three components:
 For the best perfomance when chaining image filters together, *Shinpuru Image* includes a `SIFastChainableImage` type that prevents the chain from converting to `UIImage` between individual chained filters. The syntax is slightly different and requires the source `UIImage` to be cast to a `SIFastChainableImage` and the final output to be converted back to a `UIImage`:
 
 ```
-            let chained = SIFastChainableImage(image: self.image)
+            let image = UIImage(named: "oculista.jpg")!
+
+            let chained = SIFastChainableImage(image: image)
                 .SIPhotoEffectFade()
                 .SIGaussianBlur(radius: 5)
                 .SIFalseColor(color0: UIColor.blueColor(), color1: UIColor.redColor())
