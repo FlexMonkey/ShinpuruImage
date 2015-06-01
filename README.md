@@ -57,6 +57,7 @@
 * `func SIColorControls(#saturation: Float, brightness: Float, contrast: Float) -> UIImage` Adjusts saturation, brightness, and contrast values.
 * `func SIExposureAdjust(#ev: Float) -> UIImage` Adjusts the exposure setting for an image similar to the way you control exposure for a camera when you change the F-stop.
 * `func SIGammaAdjust(#power: Float) -> UIImage` Adjusts midtone brightness.
+* `func SIHueAdjust(#power: Float) -> UIImage` Changes the overall hue, or tint, of the source pixels.
 * `func SIVibrance(#amount: Float) -> UIImage` Adjusts the saturation of an image while keeping pleasing skin tones.
 * `func SIWhitePointAdjust(#color: UIColor) -> UIImage` Adjusts the reference white point for an image and maps all colors in the source using the new reference.
 
