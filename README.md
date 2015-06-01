@@ -92,7 +92,7 @@ The demo app contains three components:
 
 * *[RotateAndScale](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/RotateAndScale.swift)* - demonstrates chained `SIScale()` and `SIRotate()` controlled by three numeric sliders
 * *[ColorControls](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ColorControls.swift)* - demonstrates `SIColorControls` controlled by three numeric sliders
-* *[Histogram](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/Histogram.swift)* - uses [ios-charts](https://github.com/danielgindi/ios-charts) to demonstrate the use of `SIHistogramCalculation`
+* *[Histogram](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/Histogram.swift)* - uses [ios-charts](https://github.com/danielgindi/ios-charts) to demonstrate the use of `SIHistogramCalculation` and the performance benefits of using fast filter chaining. 
 
 ## Filter Chaining 
 
