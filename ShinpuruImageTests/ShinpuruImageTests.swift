@@ -48,6 +48,8 @@ class ShinpuruImageTests: XCTestCase
                 .SIBloom(radius: 20, intensity: 20)
                 .SIColorControls(saturation: 0.5, brightness: 1, contrast: 2)
                 .SIWhitePointAdjust(color: UIColor.yellowColor())
+                .SIFalseColor(color0: UIColor.blueColor(), color1: UIColor.redColor())
+                .SIPixellate(scale: 5)
             
             self.imageView.image = chained
         }
@@ -71,6 +73,8 @@ class ShinpuruImageTests: XCTestCase
                 .SIBloom(radius: 20, intensity: 20)
                 .SIColorControls(saturation: 0.5, brightness: 1, contrast: 2)
                 .SIWhitePointAdjust(color: UIColor.yellowColor())
+                .SIFalseColor(color0: UIColor.blueColor(), color1: UIColor.redColor())
+                .SIPixellate(scale: 5)
                 .toUIImage()
             
             self.imageView.image = chained
