@@ -94,9 +94,20 @@ The demo app contains three components:
 * *[ColorControls](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ColorControls.swift)* - demonstrates `SIColorControls` controlled by three numeric sliders
 * *[Histogram](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/Histogram.swift)* - uses [ios-charts](https://github.com/danielgindi/ios-charts) to demonstrate the use of `SIHistogramCalculation`
 
-## Performance 
+## Filter Chaining 
 
-Because *ShinpuruImage* converts to and from `UIImage` with each filter invocation, using it for chaining filters together will never be as performant as using CoreImage properly.
+For the best perfomance when chaining image filters together, *Shinpuru Image* includes a `SIFastChainableImage` type that prevents the chain from converting to `UIImage` between individual chained filters. The syntax is slightly different and requires the source `UIImage` to be cast to a `SIFastChainableImage` and the final output to be converted back to a `UIImage`:
+
+```
+            let chained = SIFastChainableImage, ,(image: self.image)
+                .SIPhotoEffectFade()
+                .SIGaussianBlur(radius: 5)
+                .SIFalseColor(color0: UIColor.blueColor(), color1: UIColor.redColor())
+                .SIPixellate(scale: 5)
+                .toUIImage()
+```
+
+For complex chains of filters, using `SIFastChainableImage` can be four or fives times faster. However, in this mode, color management is turned off.
 
 ## Blurring Images
 
