@@ -168,6 +168,15 @@ extension UIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputPower])
     }
 
+    func SIHueAdjust(#power: Float) -> UIImage
+    {
+        let inputAngle = KeyValuePair(key: "inputAngle", value: power)
+        
+        let filterName = "CIHueAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputAngle])
+    }
+    
     func SIVibrance(#amount: Float) -> UIImage
     {
         let inputAmount = KeyValuePair(key: "inputAmount", value: amount)

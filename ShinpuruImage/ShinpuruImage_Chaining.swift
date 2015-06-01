@@ -17,6 +17,8 @@
 
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>
+//
+// Requires ShinpuruImage_CoreImage.swift
 
 import UIKit
 
@@ -166,6 +168,15 @@ extension CIImage
         let filterName = "CIGammaAdjust"
         
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputPower])
+    }
+    
+    func SIHueAdjust(#power: Float) -> CIImage
+    {
+        let inputAngle = KeyValuePair(key: "inputAngle", value: power)
+        
+        let filterName = "CIHueAdjust"
+        
+        return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputAngle])
     }
     
     func SIVibrance(#amount: Float) -> CIImage

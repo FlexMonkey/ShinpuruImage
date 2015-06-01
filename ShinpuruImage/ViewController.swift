@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     let mainGroup = SLVGroup()
     
-    let segmentedControl = SLSegmentedControl(items: ["Simple Demo", "Histogram Demo"])
+    let segmentedControl = SLSegmentedControl(items: ["Simple Demo", "Histogram / Fast Chaining Demo"])
     
     override func viewDidLoad()
     {
