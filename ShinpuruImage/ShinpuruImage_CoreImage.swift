@@ -225,5 +225,5 @@ class ShinpuruCoreImageHelper
     }
 }
 
-typealias SIChainableImage = CIImage
+typealias SIFastChainableImage = CIImage
 typealias KeyValuePair = (key:String, value: AnyObject)

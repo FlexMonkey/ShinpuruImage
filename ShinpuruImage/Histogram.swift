@@ -120,7 +120,7 @@ class Histogram: SLHGroup
         }
         else
         {
-            image = SIChainableImage(image: UIImage(named: "tram.jpg"))
+            image = SIFastChainableImage(image: UIImage(named: "tram.jpg"))
                 .SIWhitePointAdjust(color: targetColor)
                 .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
                 .SIGammaAdjust(power: gammaSlider.value)

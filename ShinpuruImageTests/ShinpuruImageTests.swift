@@ -59,7 +59,7 @@ class ShinpuruImageTests: XCTestCase
     {
         self.measureBlock()
         {
-            let chained = SIChainableImage(image: self.image)
+            let chained = SIFastChainableImage(image: self.image)
                 .SIPhotoEffectFade()
                 .SIGaussianBlur(radius: 5)
                 .SIPhotoEffectInstant()
@@ -81,7 +81,6 @@ class ShinpuruImageTests: XCTestCase
         }
     }
     
-    /*
     // 0.311 sec on iPad Air 2
     // 0.348 sec on iPhone 6
     func testPerformanceSIFastBlur()
@@ -120,5 +119,4 @@ class ShinpuruImageTests: XCTestCase
             }
         }
     }
-    */
 }
