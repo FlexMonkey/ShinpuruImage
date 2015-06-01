@@ -15,11 +15,14 @@
 		3EB16D251B0DAF860014A78D /* ShinpuruImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D241B0DAF860014A78D /* ShinpuruImageTests.swift */; };
 		3EB16D301B0DAF9E0014A78D /* ShinpuruImage_vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */; };
 		3EB16D331B0DB0010014A78D /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3EB16D321B0DB0010014A78D /* image.jpg */; };
+		3EB16D391B183E3E0014A78D /* ShinpuruImage_Chaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D381B183E3E0014A78D /* ShinpuruImage_Chaining.swift */; };
+		3EB16D3A1B183F230014A78D /* ShinpuruImage_Chaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB16D381B183E3E0014A78D /* ShinpuruImage_Chaining.swift */; };
 		BE98BAFD1B12142C009F1D9F /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAFC1B12141E009F1D9F /* Charts.framework */; };
 		BE98BAFE1B12142C009F1D9F /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BE98BAFC1B12141E009F1D9F /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE98BB031B132BBF009F1D9F /* Histogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE98BB021B132BBF009F1D9F /* Histogram.swift */; };
 		BE98BB051B132D47009F1D9F /* glass.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE98BB041B132D47009F1D9F /* glass.jpg */; };
 		BE98BB071B133832009F1D9F /* HistogramScreenShot.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */; };
+		BE98BB0A1B1C4FE0009F1D9F /* tram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BE98BB091B1C4FE0009F1D9F /* tram.jpg */; };
 		BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */; };
 		BEF756A51B1019C400B3B9B3 /* oculista.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A31B1019C400B3B9B3 /* oculista.jpg */; };
 		BEF756A61B1019C400B3B9B3 /* vegas.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BEF756A41B1019C400B3B9B3 /* vegas.jpg */; };
@@ -86,10 +89,12 @@
 		3EB16D241B0DAF860014A78D /* ShinpuruImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShinpuruImageTests.swift; sourceTree = "<group>"; };
 		3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_vImage.swift; sourceTree = "<group>"; };
 		3EB16D321B0DB0010014A78D /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		3EB16D381B183E3E0014A78D /* ShinpuruImage_Chaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_Chaining.swift; sourceTree = "<group>"; };
 		BE98BAF71B12141E009F1D9F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = ShinpuruImage/Charts/Charts.xcodeproj; sourceTree = "<group>"; };
 		BE98BB021B132BBF009F1D9F /* Histogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Histogram.swift; sourceTree = "<group>"; };
 		BE98BB041B132D47009F1D9F /* glass.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = glass.jpg; path = assets/glass.jpg; sourceTree = "<group>"; };
 		BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = HistogramScreenShot.jpg; path = assets/HistogramScreenShot.jpg; sourceTree = "<group>"; };
+		BE98BB091B1C4FE0009F1D9F /* tram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tram.jpg; path = assets/tram.jpg; sourceTree = "<group>"; };
 		BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinpuruImage_CoreImage.swift; sourceTree = "<group>"; };
 		BEF756A31B1019C400B3B9B3 /* oculista.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = oculista.jpg; path = assets/oculista.jpg; sourceTree = "<group>"; };
 		BEF756A41B1019C400B3B9B3 /* vegas.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = vegas.jpg; path = assets/vegas.jpg; sourceTree = "<group>"; };
@@ -186,6 +191,7 @@
 			children = (
 				3EB16D2F1B0DAF9E0014A78D /* ShinpuruImage_vImage.swift */,
 				BEF756A11B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift */,
+				3EB16D381B183E3E0014A78D /* ShinpuruImage_Chaining.swift */,
 			);
 			name = shinpuruImage;
 			sourceTree = "<group>";
@@ -193,6 +199,7 @@
 		3EB16D311B0DAFD50014A78D /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				BE98BB091B1C4FE0009F1D9F /* tram.jpg */,
 				BEF756BC1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG */,
 				BE98BB061B133832009F1D9F /* HistogramScreenShot.jpg */,
 				BEF756A31B1019C400B3B9B3 /* oculista.jpg */,
@@ -338,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EB16D331B0DB0010014A78D /* image.jpg in Resources */,
+				BE98BB0A1B1C4FE0009F1D9F /* tram.jpg in Resources */,
 				BEF756BD1B1093B200B3B9B3 /* shinpuruImageScreenShot.PNG in Resources */,
 				BE98BB051B132D47009F1D9F /* glass.jpg in Resources */,
 				3EB16D141B0DAF860014A78D /* Main.storyboard in Resources */,
@@ -371,6 +379,7 @@
 				BEF756B71B10849300B3B9B3 /* LabelledSlider.swift in Sources */,
 				BEF756B31B103D6400B3B9B3 /* SLGroup.swift in Sources */,
 				BEF756A21B0E722D00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */,
+				3EB16D391B183E3E0014A78D /* ShinpuruImage_Chaining.swift in Sources */,
 				BE98BB031B132BBF009F1D9F /* Histogram.swift in Sources */,
 				3EB16D111B0DAF860014A78D /* ViewController.swift in Sources */,
 				BEF756BB1B108F3300B3B9B3 /* ColorControls.swift in Sources */,
@@ -382,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB16D3A1B183F230014A78D /* ShinpuruImage_Chaining.swift in Sources */,
 				BEF756AD1B102A8A00B3B9B3 /* ShinpuruImage_CoreImage.swift in Sources */,
 				BEF756AC1B102A2200B3B9B3 /* ShinpuruImage_vImage.swift in Sources */,
 				3EB16D251B0DAF860014A78D /* ShinpuruImageTests.swift in Sources */,

@@ -16,16 +16,16 @@ class ViewController: UIViewController {
     
     let mainGroup = SLVGroup()
     
-    let segmentedControl = SLSegmentedControl(items: ["Simple Demo", "Histogram Demo"])
+    let segmentedControl = SLSegmentedControl(items: ["Simple Demo", "Histogram / Fast Chaining Demo"])
     
     override func viewDidLoad()
     {
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = 1
         segmentedControl.explicitSize = 60
         segmentedControl.addTarget(self, action: "selectionChange", forControlEvents: UIControlEvents.ValueChanged)
         
         mainGroup.margin = 20
-        mainGroup.children = [segmentedControl, simpleDemo]
+        mainGroup.children = [segmentedControl, histogram]
         
         view.addSubview(mainGroup)
     }

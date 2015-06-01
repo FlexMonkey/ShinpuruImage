@@ -31,6 +31,13 @@ class Histogram: SLHGroup
     
     let gammaSlider = LabelledSlider(title: "Gamma", minimumValue: 0, maximumValue: 4)
     
+    let hueSlider = LabelledSlider(title: "Hue", minimumValue: 0, maximumValue: Float(M_PI * 2))
+    let exposureSlider = LabelledSlider(title: "Exposure", minimumValue: 0, maximumValue: 4)
+    
+    let fastChainHGroup = SLHGroup()
+    let fastChainSwitch = UISwitch()
+    let fastChainLabel = UILabel()
+    
     let chart = LineChartView()
     
     required init()
@@ -59,10 +66,10 @@ class Histogram: SLHGroup
         blueSlider.value = 1
         
         saturationSlider.value = 2
-        brightnessSlider.value = 0
         contrastSlider.value = 1
         
         gammaSlider.value = 1
+        exposureSlider.value = 0.5
         
         redSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         greenSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
@@ -74,8 +81,17 @@ class Histogram: SLHGroup
         
         gammaSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
         
+        hueSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        exposureSlider.addTarget(self, action: "updateImage", forControlEvents: UIControlEvents.ValueChanged)
+        
+        fastChainLabel.text = "Use Fast Chaining"
+        fastChainLabel.textAlignment = NSTextAlignment.Right
+        fastChainLabel.frame = CGRect(x: 0, y: 0, width: 1, height: fastChainSwitch.intrinsicContentSize().height)
+        fastChainHGroup.children = [fastChainLabel, fastChainSwitch]
+        fastChainHGroup.explicitSize = fastChainSwitch.intrinsicContentSize().height
+
         rightGroup.children = [imageView, chart]
-        leftGroup.children = [redSlider, greenSlider, blueSlider, saturationSlider, brightnessSlider, contrastSlider, gammaSlider]
+        leftGroup.children = [redSlider, greenSlider, blueSlider, saturationSlider, brightnessSlider, contrastSlider, gammaSlider, hueSlider, exposureSlider, fastChainHGroup]
         
         children = [leftGroup, rightGroup]
         
@@ -89,10 +105,33 @@ class Histogram: SLHGroup
             blue: CGFloat(blueSlider.value),
             alpha: CGFloat(1.0))
         
-        let image = UIImage(named: "glass.jpg")?
-            .SIWhitePointAdjust(color: targetColor)
-            .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
-            .SIGammaAdjust(power: gammaSlider.value)
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        let image: UIImage!
+        
+        if !fastChainSwitch.on
+        {
+            image = UIImage(named: "tram.jpg")?
+                .SIWhitePointAdjust(color: targetColor)
+                .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+                .SIGammaAdjust(power: gammaSlider.value)
+                .SIExposureAdjust(ev: exposureSlider.value)
+                .SIHueAdjust(power: hueSlider.value)
+        }
+        else
+        {
+            image = SIChainableImage(image: UIImage(named: "tram.jpg"))
+                .SIWhitePointAdjust(color: targetColor)
+                .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
+                .SIGammaAdjust(power: gammaSlider.value)
+                .SIExposureAdjust(ev: exposureSlider.value)
+                .SIHueAdjust(power: hueSlider.value)
+                .toUIImage()
+        }
+        
+        let duration = CFAbsoluteTimeGetCurrent() - startTime
+        
+        println("duration = \(duration)  fast chain = \(fastChainSwitch.on)")
         
         let histogram = image?.SIHistogramCalculation()
         
