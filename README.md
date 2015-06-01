@@ -17,10 +17,11 @@
 
 ## Installation
 
-*ShinpuruImage* consists of two Swift files and to use *ShinpuruImage* in your own project, you simply need to copy:
+*ShinpuruImage* consists of three Swift files and to use *ShinpuruImage* in your own project, you simply need to copy:
 
 * [ShinpuruImage_vImage.swift](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ShinpuruImage_vImage.swift)
 * [ShinpuruImage_CoreImage.swift](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ShinpuruImage_CoreImage.swift)
+* [ShinpuruImage_Chaining](https://github.com/FlexMonkey/ShinpuruImage/blob/master/ShinpuruImage/ShinpuruImage_Chaining.swift)
 
 ## Filters
 
