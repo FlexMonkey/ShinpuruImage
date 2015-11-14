@@ -117,7 +117,7 @@ public class ChartLegend: ChartComponentBase
                 continue;
             }
             
-            var size = (labels[i] as NSString!).sizeWithAttributes([NSFontAttributeName: font]);
+            let size = (labels[i] as NSString!).sizeWithAttributes([NSFontAttributeName: font]);
             
             if (size.width > maxW)
             {
@@ -156,7 +156,7 @@ public class ChartLegend: ChartComponentBase
                     width += formSize + formToTextSpace;
                 }
                 
-                var size = (labels[i] as NSString!).sizeWithAttributes([NSFontAttributeName: labelFont]);
+                let size = (labels[i] as NSString!).sizeWithAttributes([NSFontAttributeName: labelFont]);
                 
                 width += size.width;
                 height += size.height;
@@ -188,8 +188,8 @@ public class ChartLegend: ChartComponentBase
 
     public func calculateDimensions(labelFont: UIFont)
     {
-        var maxEntrySize = getMaximumEntrySize(labelFont);
-        var fullSize = getFullSize(labelFont);
+        let maxEntrySize = getMaximumEntrySize(labelFont);
+        let fullSize = getFullSize(labelFont);
         
         if (position == .RightOfChart
             || position == .RightOfChartCenter
@@ -220,7 +220,7 @@ public class ChartLegend: ChartComponentBase
     /// * A nil color will avoid drawing a form, and a clearColor will leave a space for the form.
     /// This will disable the feature that automatically calculates the legend labels and colors from the datasets.
     /// Call resetLegendToAuto(...) to re-enable automatic calculation (and then notifyDataSetChanged() is needed). 
-    public func setLegend(#colors: [UIColor?], labels: [String?])
+    public func setLegend(colors colors: [UIColor?], labels: [String?])
     {
         self.labels = labels;
         self.colors = colors;
@@ -283,7 +283,7 @@ public class ChartLegend: ChartComponentBase
     /// * A nil color will avoid drawing a form, and a clearColor will leave a space for the form.
     /// This will disable the feature that automatically calculates the legend labels and colors from the datasets.
     /// Call resetLegendToAuto(...) to re-enable automatic calculation, and then if needed - call notifyDataSetChanged() on the chart to make it refresh the data.
-    public func setLegend(#colors: [NSObject], labels: [NSObject])
+    public func setLegend(colors colors: [NSObject], labels: [NSObject])
     {
         self.labelsObjc = labels;
         self.colorsObjc = colors;

@@ -27,20 +27,20 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
     }
     
     /// draws the x-labels on the specified y-position
-    internal override func drawLabels(#context: CGContext, pos: CGFloat)
+    internal override func drawLabels(context context: CGContext, pos: CGFloat)
     {
         if (_chart.data === nil)
         {
             return;
         }
         
-        var labelFont = _xAxis.labelFont;
-        var labelTextColor = _xAxis.labelTextColor;
+        let labelFont = _xAxis.labelFont;
+        let labelTextColor = _xAxis.labelTextColor;
         
-        var barData = _chart.data as! BarChartData;
-        var step = barData.dataSetCount;
+        let barData = _chart.data as! BarChartData;
+        let step = barData.dataSetCount;
         
-        var trans = transformer.valueToPixelMatrix;
+        let trans = transformer.valueToPixelMatrix;
         
         var position = CGPoint(x: 0.0, y: 0.0);
         
@@ -59,7 +59,7 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
             
             if (viewPortHandler.isInBoundsX(position.x) && i >= 0 && i < _xAxis.values.count)
             {
-                var label = _xAxis.values[i];
+                let label = _xAxis.values[i];
                 var labelns = label as NSString;
                 
                 if (_xAxis.isAvoidFirstLastClippingEnabled)
@@ -67,7 +67,7 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
                     // avoid clipping of the last
                     if (i == _xAxis.values.count - 1)
                     {
-                        var width = label.sizeWithAttributes([NSFontAttributeName: _xAxis.labelFont]).width;
+                        let width = label.sizeWithAttributes([NSFontAttributeName: _xAxis.labelFont]).width;
                         
                         if (width > viewPortHandler.offsetRight * 2.0
                             && position.x + width > viewPortHandler.chartWidth)
@@ -77,7 +77,7 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
                     }
                     else if (i == 0)
                     { // avoid clipping of the first
-                        var width = label.sizeWithAttributes([NSFontAttributeName: _xAxis.labelFont]).width;
+                        let width = label.sizeWithAttributes([NSFontAttributeName: _xAxis.labelFont]).width;
                         position.x += width / 2.0;
                     }
                 }
@@ -89,15 +89,15 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
     
     private var _gridLineSegmentsBuffer = [CGPoint](count: 2, repeatedValue: CGPoint());
     
-    public override func renderGridLines(#context: CGContext)
+    public override func renderGridLines(context context: CGContext)
     {
         if (!_xAxis.isDrawGridLinesEnabled || !_xAxis.isEnabled)
         {
             return;
         }
         
-        var barData = _chart.data as! BarChartData;
-        var step = barData.dataSetCount;
+        let barData = _chart.data as! BarChartData;
+        let step = barData.dataSetCount;
         
         CGContextSaveGState(context);
         
@@ -112,7 +112,7 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
             CGContextSetLineDash(context, 0.0, nil, 0);
         }
         
-        var trans = transformer.valueToPixelMatrix;
+        let trans = transformer.valueToPixelMatrix;
         
         var position = CGPoint(x: 0.0, y: 0.0);
         

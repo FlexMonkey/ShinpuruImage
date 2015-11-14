@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         let top = topLayoutGuide.length
         let bottom = bottomLayoutGuide.length
         
-        mainGroup.frame = CGRect(x: 0, y: top, width: view.frame.width, height: view.frame.height - top - bottom).rectByInsetting(dx: 20, dy: 20)
+        mainGroup.frame = CGRect(x: 0, y: top, width: view.frame.width, height: view.frame.height - top - bottom).insetBy(dx: 20, dy: 20)
     }
 
 }

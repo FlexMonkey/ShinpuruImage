@@ -26,7 +26,7 @@ internal class ChartUtils
         internal static let RAD2DEG = 180.0 / M_PI;
     };
     
-    internal class func roundToNextSignificant(#number: Double) -> Double
+    internal class func roundToNextSignificant(number number: Double) -> Double
     {
         if (isinf(number) || isnan(number) || number == 0)
         {
@@ -47,7 +47,7 @@ internal class ChartUtils
             return 0;
         }
         
-        var i = roundToNextSignificant(number: Double(number));
+        let i = roundToNextSignificant(number: Double(number));
         return Int(ceil(-log10(i))) + 2;
     }
     
@@ -71,11 +71,11 @@ internal class ChartUtils
         
         for (var i = 0; i < valsAtIndex.count; i++)
         {
-            var sel = valsAtIndex[i];
+            let sel = valsAtIndex[i];
             
             if (axis == nil || sel.dataSet?.axisDependency == axis)
             {
-                var cdistance = abs(sel.value - value);
+                let cdistance = abs(sel.value - value);
                 if (cdistance < distance)
                 {
                     index = valsAtIndex[i].dataSetIndex;
@@ -94,11 +94,11 @@ internal class ChartUtils
         
         for (var i = 0, count = valsAtIndex.count; i < count; i++)
         {
-            var sel = valsAtIndex[i];
+            let sel = valsAtIndex[i];
             
             if (sel.dataSet!.axisDependency == axis)
             {
-                var cdistance = abs(sel.value - val);
+                let cdistance = abs(sel.value - val);
                 if (cdistance < distance)
                 {
                     distance = cdistance;
@@ -110,7 +110,7 @@ internal class ChartUtils
     }
     
     /// Calculates the position around a center point, depending on the distance from the center, and the angle of the position around the center.
-    internal class func getPosition(#center: CGPoint, dist: CGFloat, angle: CGFloat) -> CGPoint
+    internal class func getPosition(center center: CGPoint, dist: CGFloat, angle: CGFloat) -> CGPoint
     {
         return CGPoint(
             x: center.x + dist * cos(angle * Math.FDEG2RAD),
@@ -118,11 +118,11 @@ internal class ChartUtils
         );
     }
     
-    internal class func drawText(#context: CGContext, text: String, var point: CGPoint, align: NSTextAlignment, attributes: [NSObject : AnyObject]?)
+    internal class func drawText(context context: CGContext, text: String, var point: CGPoint, align: NSTextAlignment, attributes: [String : AnyObject]?)
     {
         if (align == .Center)
         {
-            point.x -= text.sizeWithAttributes(attributes).width / 2.0;
+            point.x -= (text as NSString).sizeWithAttributes(attributes).width / 2.0;
         }
         else if (align == .Right)
         {
@@ -132,6 +132,9 @@ internal class ChartUtils
         UIGraphicsPushContext(context);
         (text as NSString).drawAtPoint(point, withAttributes: attributes);
         UIGraphicsPopContext();
+        
+
+        
     }
     
     /// returns an angle between 0.0 < 360.0 (not less than zero, less than 360)

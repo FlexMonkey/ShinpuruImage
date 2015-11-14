@@ -30,9 +30,9 @@ public class SLHGroup: SLGroup
 
         let childMetrics = SLGroup.calculateChildMetrics(children: children, childPercentageSizes: childPercentageSizes, availableSize: frame.width, totalExplicitSize: totalExplicitSize)
    
-        map(zip(children, childMetrics))
+        zip(children, childMetrics).map
         {
-            $0.frame = CGRect(x: $1.origin, y: 0, width: $1.size, height: self.frame.height).rectByInsetting(dx: self.margin / 2, dy: 0)
+            $0.frame = CGRect(x: $1.origin, y: 0, width: $1.size, height: self.frame.height).insetBy(dx: self.margin / 2, dy: 0)
         }
     }
 }
@@ -47,9 +47,9 @@ public class SLVGroup: SLGroup
         
         let childMetrics = SLGroup.calculateChildMetrics(children: children, childPercentageSizes: childPercentageSizes, availableSize: frame.height, totalExplicitSize: totalExplicitSize)
         
-        map(zip(children, childMetrics))
+        zip(children, childMetrics).map
         {
-            $0.frame = CGRect(x: 0, y: $1.origin, width: self.frame.width, height: $1.size).rectByInsetting(dx: 0, dy: self.margin / 2)
+            $0.frame = CGRect(x: 0, y: $1.origin, width: self.frame.width, height: $1.size).insetBy(dx: 0, dy: self.margin / 2)
         }
     }
 }
@@ -141,11 +141,11 @@ public class SLGroup: UIView, SLLayoutItem
     
     /// Returns an array of ChildMetric instances that define absolute position and width
     /// to fit within totalExplicitSize
-    class func calculateChildMetrics(#children: [UIView], childPercentageSizes: [CGFloat], availableSize: CGFloat, totalExplicitSize: CGFloat) -> [ChildMetric]
+    class func calculateChildMetrics(children children: [UIView], childPercentageSizes: [CGFloat], availableSize: CGFloat, totalExplicitSize: CGFloat) -> [ChildMetric]
     {
         var currentOrigin: CGFloat = 0
 
-        let returnArray = map(zip(children, childPercentageSizes))
+        let returnArray = zip(children, childPercentageSizes).map
         {
             (child, childPercentage) -> ChildMetric in
                 let percentageWidth = childPercentage / 100 * (availableSize - totalExplicitSize)
@@ -200,7 +200,7 @@ public class SLGroup: UIView, SLLayoutItem
         }
     }
     
-    func removeChild(#atIndex: Int)
+    func removeChild(atIndex atIndex: Int)
     {
         if animationRunning
         {
@@ -288,7 +288,7 @@ public class SLGroup: UIView, SLLayoutItem
         {
             children[newChildIndex!] = newChild!
             
-            UIView.animateWithDuration(fadeDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {newChild?.alpha = 1}, completion: nil)
+            UIView.animateWithDuration(fadeDuration, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {self.newChild?.alpha = 1}, completion: nil)
             
             animationRunning = false
             newChild = nil

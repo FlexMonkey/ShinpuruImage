@@ -154,7 +154,7 @@ public class ChartYAxis: ChartAxisBase
     
     public func requiredSize() -> CGSize
     {
-        var label = getLongestLabel() as NSString;
+        let label = getLongestLabel() as NSString;
         var size = label.sizeWithAttributes([NSFontAttributeName: labelFont]);
         size.width += xOffset * 2.0;
         size.height += yOffset * 2.0;
@@ -167,7 +167,7 @@ public class ChartYAxis: ChartAxisBase
         
         for (var i = 0; i < entries.count; i++)
         {
-            var text = getFormattedLabel(i);
+            let text = getFormattedLabel(i);
             
             if (longest.lengthOfBytesUsingEncoding(NSUTF16StringEncoding) < text.lengthOfBytesUsingEncoding(NSUTF16StringEncoding))
             {

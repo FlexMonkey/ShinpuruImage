@@ -64,7 +64,7 @@ public class ChartXAxis: ChartAxisBase
         
         for (var i = 0; i < values.count; i++)
         {
-            var text = values[i];
+            let text = values[i];
             
             if (longest.lengthOfBytesUsingEncoding(NSUTF16StringEncoding) < text.lengthOfBytesUsingEncoding(NSUTF16StringEncoding))
             {
