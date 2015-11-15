@@ -59,7 +59,7 @@ public class SLSpacer: UIView, SLLayoutItem
     
     required public init(coder aDecoder: NSCoder)
     {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 }
 

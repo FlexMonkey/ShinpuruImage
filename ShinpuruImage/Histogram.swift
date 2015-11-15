@@ -120,7 +120,7 @@ class Histogram: SLHGroup
         }
         else
         {
-            image = SIFastChainableImage(image: UIImage(named: "tram.jpg"))
+            image = SIFastChainableImage(image: UIImage(named: "tram.jpg")!)!
                 .SIWhitePointAdjust(color: targetColor)
                 .SIColorControls(saturation: saturationSlider.value, brightness: brightnessSlider.value, contrast: contrastSlider.value)
                 .SIGammaAdjust(power: gammaSlider.value)
@@ -131,7 +131,7 @@ class Histogram: SLHGroup
         
         let duration = CFAbsoluteTimeGetCurrent() - startTime
         
-        println("duration = \(duration)  fast chain = \(fastChainSwitch.on)")
+        print("duration = \(duration)  fast chain = \(fastChainSwitch.on)")
         
         let histogram = image?.SIHistogramCalculation()
         

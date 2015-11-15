@@ -59,7 +59,7 @@ public class CandleChartDataSet: BarLineScatterCandleChartDataSet
 
         for (var i = 0; i < entries.count; i++)
         {
-            var e = entries[i];
+            let e = entries[i];
 
             if (e.low < _yMin)
             {

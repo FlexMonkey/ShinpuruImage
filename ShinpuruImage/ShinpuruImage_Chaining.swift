@@ -68,17 +68,17 @@ extension CIImage
     
     // MARK: CICategoryColorEffect
     
-    func SIFalseColor(#color0: UIColor, color1: UIColor) -> CIImage
+    func SIFalseColor(color0 color0: UIColor, color1: UIColor) -> CIImage
     {
-        let inputColor0 = KeyValuePair(key: "inputColor0", value: CIColor(color: color0)!)
-        let inputColor1 = KeyValuePair(key: "inputColor1", value: CIColor(color: color1)!)
+        let inputColor0 = KeyValuePair(key: "inputColor0", value: CIColor(color: color0))
+        let inputColor1 = KeyValuePair(key: "inputColor1", value: CIColor(color: color1))
         
         let filterName = "CIFalseColor"
         
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputColor0, inputColor1])
     }
     
-    func SIPosterize(#levels: Int) -> CIImage
+    func SIPosterize(levels levels: Int) -> CIImage
     {
         let inputLevels = KeyValuePair(key: "inputLevels", value: levels)
         
@@ -87,9 +87,9 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputLevels])
     }
     
-    func SIMonochrome(#color: UIColor, intensity: Float) -> CIImage
+    func SIMonochrome(color color: UIColor, intensity: Float) -> CIImage
     {
-        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color)!)
+        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color))
         let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
         
         let filterName = "CIColorMonochrome"
@@ -99,7 +99,7 @@ extension CIImage
     
     // MARK: CICategoryStylize
     
-    func SIBloom(#radius: Float, intensity: Float) -> CIImage
+    func SIBloom(radius radius: Float, intensity: Float) -> CIImage
     {
         let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
         let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
@@ -109,7 +109,7 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius, inputIntensity])
     }
     
-    func SIGloom(#radius: Float, intensity: Float) -> CIImage
+    func SIGloom(radius radius: Float, intensity: Float) -> CIImage
     {
         let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
         let inputIntensity = KeyValuePair(key: "inputIntensity", value: intensity)
@@ -119,7 +119,7 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputRadius, inputIntensity])
     }
     
-    func SIPixellate(#scale: Float) -> CIImage
+    func SIPixellate(scale scale: Float) -> CIImage
     {
         let inputScale = KeyValuePair(key: "inputScale", value: scale)
         
@@ -130,7 +130,7 @@ extension CIImage
     
     // MARK: CICategoryBlur
     
-    func SIGaussianBlur(#radius: Float) -> CIImage
+    func SIGaussianBlur(radius radius: Float) -> CIImage
     {
         let inputRadius = KeyValuePair(key: "inputRadius", value: radius)
         
@@ -141,7 +141,7 @@ extension CIImage
     
     // MARK: CICategoryColorAdjustment
     
-    func SIColorControls(#saturation: Float, brightness: Float, contrast: Float) -> CIImage
+    func SIColorControls(saturation saturation: Float, brightness: Float, contrast: Float) -> CIImage
     {
         let inputSaturation = KeyValuePair(key: "inputSaturation", value: saturation)
         let inputBrightness = KeyValuePair(key: "inputBrightness", value: brightness)
@@ -152,7 +152,7 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputSaturation, inputBrightness, inputContrast])
     }
     
-    func SIExposureAdjust(#ev: Float) -> CIImage
+    func SIExposureAdjust(ev ev: Float) -> CIImage
     {
         let inputEV = KeyValuePair(key: "inputEV", value: ev)
         
@@ -161,7 +161,7 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputEV])
     }
     
-    func SIGammaAdjust(#power: Float) -> CIImage
+    func SIGammaAdjust(power power: Float) -> CIImage
     {
         let inputPower = KeyValuePair(key: "inputPower", value: power)
         
@@ -170,7 +170,7 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputPower])
     }
     
-    func SIHueAdjust(#power: Float) -> CIImage
+    func SIHueAdjust(power power: Float) -> CIImage
     {
         let inputAngle = KeyValuePair(key: "inputAngle", value: power)
         
@@ -179,7 +179,7 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputAngle])
     }
     
-    func SIVibrance(#amount: Float) -> CIImage
+    func SIVibrance(amount amount: Float) -> CIImage
     {
         let inputAmount = KeyValuePair(key: "inputAmount", value: amount)
         
@@ -188,9 +188,9 @@ extension CIImage
         return ShinpuruCoreImageHelper.applyFilter(self, filterName: filterName, keyValuePairs: [inputAmount])
     }
     
-    func SIWhitePointAdjust(#color: UIColor) -> CIImage
+    func SIWhitePointAdjust(color color: UIColor) -> CIImage
     {
-        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color)!)
+        let inputColor = KeyValuePair(key: "inputColor", value: CIColor(color: color))
         
         let filterName = "CIWhitePointAdjust"
         
@@ -201,8 +201,8 @@ extension CIImage
     
     func toUIImage() -> UIImage
     {
-        let filteredImageRef = ShinpuruCoreImageHelper.ciContextFast.createCGImage(self, fromRect: self.extent())
-        let filteredImage = UIImage(CGImage: filteredImageRef)!
+        let filteredImageRef = ShinpuruCoreImageHelper.ciContextFast.createCGImage(self, fromRect: self.extent)
+        let filteredImage = UIImage(CGImage: filteredImageRef)
         
         return filteredImage
     }
@@ -217,11 +217,11 @@ extension ShinpuruCoreImageHelper
         let ciFilter = CIFilter(name: filterName)
         
         let inputImage = KeyValuePair(key: kCIInputImageKey, value: image)
-        ciFilter.setValue(inputImage.value, forKey: inputImage.key)
+        ciFilter!.setValue(inputImage.value, forKey: inputImage.key)
         
-        keyValuePairs.map({ ciFilter.setValue($0.value, forKey: $0.key) })
+        keyValuePairs.map({ ciFilter!.setValue($0.value, forKey: $0.key) })
         
-        return ciFilter.valueForKey(kCIOutputImageKey) as! CIImage
+        return ciFilter!.valueForKey(kCIOutputImageKey) as! CIImage
     }
 }
 

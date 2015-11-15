@@ -66,7 +66,7 @@ public class PieChartDataSet: ChartDataSet
     
     public override func copyWithZone(zone: NSZone) -> AnyObject
     {
-        var copy = super.copyWithZone(zone) as! PieChartDataSet;
+        let copy = super.copyWithZone(zone) as! PieChartDataSet;
         copy._sliceSpace = _sliceSpace;
         copy.selectionShift = selectionShift;
         return copy;

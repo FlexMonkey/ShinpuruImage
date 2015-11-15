@@ -87,8 +87,8 @@ public class ChartDataApproximatorFilter: ChartDataBaseFilter
             return reduceWithDouglasPeuker(points, epsilon: tolerance);
         case .None:
             return points;
-        default:
-            return points;
+        //default:
+        //    return points;
         }
     }
     
@@ -142,12 +142,12 @@ public class ChartDataApproximatorFilter: ChartDataBaseFilter
         var maxDistIndex = Int(0);
         var distMax = Double(0.0);
         
-        var firstEntry = entries[start];
-        var lastEntry = entries[end];
+        let firstEntry = entries[start];
+        let lastEntry = entries[end];
         
         for (var i = start + 1; i < end; i++)
         {
-            var dist = calcAngleBetweenLines(firstEntry, end1: lastEntry, start2: firstEntry, end2: entries[i]);
+            let dist = calcAngleBetweenLines(firstEntry, end1: lastEntry, start2: firstEntry, end2: entries[i]);
             
             // keep the point with the greatest distance
             if (dist > distMax)
@@ -175,10 +175,10 @@ public class ChartDataApproximatorFilter: ChartDataBaseFilter
     /// :param: entryPoint the point to which the distance is measured from the line
     private func calcPointToLineDistance(startEntry: ChartDataEntry, endEntry: ChartDataEntry, entryPoint: ChartDataEntry) -> Double
     {
-        var xDiffEndStart = Float(endEntry.xIndex) - Float(startEntry.xIndex);
-        var xDiffEntryStart = Float(entryPoint.xIndex) - Float(startEntry.xIndex);
+        let xDiffEndStart = Float(endEntry.xIndex) - Float(startEntry.xIndex);
+        let xDiffEntryStart = Float(entryPoint.xIndex) - Float(startEntry.xIndex);
         
-        var normalLength = sqrt((xDiffEndStart)
+        let normalLength = sqrt((xDiffEndStart)
             * (xDiffEndStart)
             + (endEntry.value - startEntry.value)
             * (endEntry.value - startEntry.value));
@@ -192,8 +192,8 @@ public class ChartDataApproximatorFilter: ChartDataBaseFilter
     /// Calculates the angle between two given lines. The provided entries mark the starting and end points of the lines.
     private func calcAngleBetweenLines(start1: ChartDataEntry, end1: ChartDataEntry, start2: ChartDataEntry, end2: ChartDataEntry) -> Double
     {
-        var angle1 = calcAngleWithRatios(start1, p2: end1);
-        var angle2 = calcAngleWithRatios(start2, p2: end2);
+        let angle1 = calcAngleWithRatios(start1, p2: end1);
+        let angle2 = calcAngleWithRatios(start2, p2: end2);
         
         return fabs(angle1 - angle2);
     }
@@ -201,16 +201,16 @@ public class ChartDataApproximatorFilter: ChartDataBaseFilter
     /// calculates the angle between two entries (points) in the chart taking ratios into consideration
     private func calcAngleWithRatios(p1: ChartDataEntry, p2: ChartDataEntry) -> Double
     {
-        var dx = Double(p2.xIndex) * Double(deltaRatio) - Double(p1.xIndex) * Double(deltaRatio);
-        var dy = p2.value * scaleRatio - p1.value * scaleRatio;
+        let dx = Double(p2.xIndex) * Double(deltaRatio) - Double(p1.xIndex) * Double(deltaRatio);
+        let dy = p2.value * scaleRatio - p1.value * scaleRatio;
         return atan2(Double(dy), dx) * ChartUtils.Math.RAD2DEG;
     }
     
     // calculates the angle between two entries (points) in the chart
     private func calcAngle(p1: ChartDataEntry, p2: ChartDataEntry) -> Double
     {
-        var dx = p2.xIndex - p1.xIndex;
-        var dy = p2.value - p1.value;
+        let dx = p2.xIndex - p1.xIndex;
+        let dy = p2.value - p1.value;
         return atan2(Double(dy), Double(dx)) * ChartUtils.Math.RAD2DEG;
     }
 }
