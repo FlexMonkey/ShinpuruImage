@@ -46,7 +46,7 @@ extension UIImage
         let greenPtr = UnsafeMutablePointer<vImagePixelCount>(green)
         let bluePtr = UnsafeMutablePointer<vImagePixelCount>(blue)
         
-        let rgba = [redPtr, greenPtr, bluePtr, alphaPtr]
+        let rgba = [alphaPtr, redPtr, greenPtr, bluePtr]
         
         let histogram = UnsafeMutablePointer<UnsafeMutablePointer<vImagePixelCount>>(rgba)
         
